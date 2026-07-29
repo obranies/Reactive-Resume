@@ -30,6 +30,7 @@ export const buildAllTemplatesFixture = (template: Template) => {
 	if (!firstExperience) throw new Error("The comprehensive fixture requires an experience item.");
 	firstExperience.roles = [
 		{
+			keepTogether: false,
 			id: "experience-role-1",
 			position: "Technical Lead",
 			period: "2024",

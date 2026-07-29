@@ -212,6 +212,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((work) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					company: work.name || "",
 					position: work.position || "",
 					location: work.location || "",
@@ -232,6 +233,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((edu) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					school: edu.institution || "",
 					degree: [edu.studyType, edu.area].filter(Boolean).join(" in ") || "",
 					area: edu.area || "",
@@ -253,6 +255,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((project) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					name: project.name || "",
 					period: formatPeriod(project.startDate, project.endDate),
 					website: createItemWebsite(project.url),
@@ -270,6 +273,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((skill) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					icon: "star",
 					iconColor: "",
 					name: skill.name || "",
@@ -289,6 +293,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((lang) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					language: lang.language || "",
 					fluency: lang.fluency || "",
 					level: parseLevel(lang.fluency),
@@ -305,6 +310,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((interest) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					icon: "star",
 					iconColor: "",
 					name: interest.name || "",
@@ -322,6 +328,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((award) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					title: award.title || "",
 					awarder: award.awarder || "",
 					date: formatSingleDate(award.date),
@@ -340,6 +347,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((cert) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					title: cert.name || "",
 					issuer: cert.issuer || "",
 					date: formatSingleDate(cert.date),
@@ -358,6 +366,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((pub) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					title: pub.name || "",
 					publisher: pub.publisher || "",
 					date: formatSingleDate(pub.releaseDate),
@@ -376,6 +385,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((vol) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					organization: vol.organization || "",
 					location: "",
 					period: formatPeriod(vol.startDate, vol.endDate),
@@ -394,6 +404,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((ref) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					name: ref.name || "",
 					position: "",
 					website: createItemWebsite(),
@@ -412,6 +423,7 @@ function convertJSONResume(jsonResume: JSONResume): ResumeData {
 				.map((profile) => ({
 					id: generateId(),
 					hidden: false,
+					keepTogether: false,
 					icon: getNetworkIcon(profile.network),
 					iconColor: "",
 					network: profile.network || "",

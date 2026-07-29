@@ -62,6 +62,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 		'<p>Paragraph <strong>bold</strong> <mark>mark</mark> <a href="https://example.com">link</a></p><ul><li>List item</li></ul>';
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "skill-1",
 			hidden: false,
 			icon: "code",
@@ -74,6 +75,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 	];
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience",
 			hidden: false,
 			company: "Analytical Engines",
@@ -84,6 +86,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 			description: "<p>Built engines.</p>",
 			roles: [
 				{
+					keepTogether: false,
 					id: "role-1",
 					position: "Senior Engineer",
 					period: "1843",
@@ -94,6 +97,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 	];
 	data.sections.education.items = [
 		{
+			keepTogether: false,
 			id: "education-1",
 			hidden: false,
 			school: "University of London",
@@ -108,6 +112,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 	];
 	data.sections.awards.items = [
 		{
+			keepTogether: false,
 			id: "award-1",
 			hidden: false,
 			title: "Prize",
@@ -129,6 +134,7 @@ const buildFixture = (rules: StyleRule[]): ResumeData => {
 			startOnNewPage: false,
 			items: [
 				{
+					keepTogether: false,
 					id: "custom-experience-1",
 					hidden: false,
 					company: "Difference Engines",

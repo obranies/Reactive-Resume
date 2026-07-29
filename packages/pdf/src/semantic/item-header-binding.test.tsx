@@ -25,6 +25,7 @@ const buildFixture = (): ResumeData => {
 		{
 			id: "certification/1",
 			hidden: false,
+			keepTogether: false,
 			title: "Certified Kubernetes Administrator",
 			issuer: "The Linux Foundation",
 			date: "Sep 2023",
@@ -36,6 +37,7 @@ const buildFixture = (): ResumeData => {
 		{
 			id: "experience/1",
 			hidden: false,
+			keepTogether: false,
 			company: "Braincore",
 			position: "Automation Engineer",
 			location: "Jakarta",

@@ -404,6 +404,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"icon": {
 										"type": "string",
 										"description": "The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available."
@@ -522,6 +527,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"company": {
 										"type": "string",
 										"minLength": 1,
@@ -594,6 +604,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 												"description": {
 													"type": "string",
 													"description": "The description of this specific role. This should be a HTML-formatted string."
+												},
+												"keepTogether": {
+													"default": false,
+													"description": "If true, this role is kept together on a single page instead of splitting across a page break.",
+													"type": "boolean"
 												}
 											},
 											"required": [
@@ -676,6 +691,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"school": {
 										"type": "string",
@@ -809,6 +829,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"name": {
 										"type": "string",
 										"minLength": 1,
@@ -921,6 +946,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"icon": {
 										"type": "string",
@@ -1035,6 +1065,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"language": {
 										"type": "string",
 										"minLength": 1,
@@ -1119,6 +1154,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"icon": {
 										"type": "string",
@@ -1211,6 +1251,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"title": {
 										"type": "string",
@@ -1329,6 +1374,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"title": {
 										"type": "string",
 										"minLength": 1,
@@ -1445,6 +1495,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"title": {
 										"type": "string",
@@ -1563,6 +1618,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
 									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
+									},
 									"organization": {
 										"type": "string",
 										"minLength": 1,
@@ -1679,6 +1739,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 									"hidden": {
 										"type": "boolean",
 										"description": "Whether to hide the item from the resume."
+									},
+									"keepTogether": {
+										"default": false,
+										"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+										"type": "boolean"
 									},
 									"name": {
 										"type": "string",
@@ -1827,6 +1892,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"recipient": {
 											"type": "string",
 											"description": "The recipient's address block as HTML (name, title, company, address, email)."
@@ -1914,6 +1984,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"content": {
 											"type": "string",
 											"description": "The rich text content of the summary item. This should be a HTML-formatted string."
@@ -1995,6 +2070,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"icon": {
 											"type": "string",
@@ -2125,6 +2205,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"company": {
 											"type": "string",
 											"minLength": 1,
@@ -2197,6 +2282,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 													"description": {
 														"type": "string",
 														"description": "The description of this specific role. This should be a HTML-formatted string."
+													},
+													"keepTogether": {
+														"default": false,
+														"description": "If true, this role is kept together on a single page instead of splitting across a page break.",
+														"type": "boolean"
 													}
 												},
 												"required": [
@@ -2290,6 +2380,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"school": {
 											"type": "string",
@@ -2434,6 +2529,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"name": {
 											"type": "string",
 											"minLength": 1,
@@ -2557,6 +2657,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"icon": {
 											"type": "string",
 											"description": "The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available."
@@ -2673,6 +2778,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"language": {
 											"type": "string",
 											"minLength": 1,
@@ -2768,6 +2878,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"icon": {
 											"type": "string",
@@ -2871,6 +2986,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"title": {
 											"type": "string",
@@ -3000,6 +3120,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"title": {
 											"type": "string",
 											"minLength": 1,
@@ -3127,6 +3252,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"title": {
 											"type": "string",
@@ -3256,6 +3386,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
 										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
+										},
 										"organization": {
 											"type": "string",
 											"minLength": 1,
@@ -3383,6 +3518,11 @@ The full JSON Schema for Reactive Resume follows. You can also fetch the latest 
 										"hidden": {
 											"type": "boolean",
 											"description": "Whether to hide the item from the resume."
+										},
+										"keepTogether": {
+											"default": false,
+											"description": "If true, this item is kept together on a single page instead of splitting across a page break.",
+											"type": "boolean"
 										},
 										"name": {
 											"type": "string",

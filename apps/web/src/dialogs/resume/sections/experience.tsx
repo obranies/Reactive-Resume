@@ -27,6 +27,7 @@ type FormValues = z.infer<typeof formSchema>;
 const defaultValues: FormValues = {
 	id: "",
 	hidden: false,
+	keepTogether: false,
 	company: "",
 	position: "",
 	location: "",
@@ -172,6 +173,7 @@ const ExperienceForm = withForm({
 								position: "",
 								period: "",
 								description: "",
+								keepTogether: false,
 							});
 						}}
 					>
@@ -226,6 +228,7 @@ const RoleFields = withForm({
 			position: "",
 			period: "",
 			description: "",
+			keepTogether: false,
 		} as RoleItem,
 		index: 0,
 		onRemove: () => undefined,

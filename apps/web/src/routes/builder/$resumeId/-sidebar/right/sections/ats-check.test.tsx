@@ -81,6 +81,7 @@ beforeEach(() => {
 const experienceItem = (overrides: Partial<ExperienceItem> = {}): ExperienceItem => ({
 	id: "exp-1",
 	hidden: false,
+	keepTogether: false,
 	company: "Analytical Engines",
 	position: "Engineer",
 	location: "London",
