@@ -9,6 +9,7 @@ const NOW = new Date("2024-06-15T00:00:00Z");
 const experienceItem = (overrides: Partial<ExperienceItem> = {}): ExperienceItem => ({
 	id: "exp-1",
 	hidden: false,
+	keepTogether: false,
 	company: "Analytical Engines",
 	position: "Engineer",
 	location: "London",
@@ -129,6 +130,7 @@ describe("date rules", () => {
 				{
 					id: "p1",
 					hidden: false,
+					keepTogether: false,
 					name: "Difference Engine",
 					period: "",
 					website: { url: "", label: "", inlineLink: false },
@@ -174,7 +176,15 @@ describe("date rules", () => {
 		const data = makeResume((resume) => {
 			resume.sections.experience.items = [
 				experienceItem({
-					roles: [{ id: "r1", position: "Junior Engineer", period: "whenever", description: "<p>Work.</p>" }],
+					roles: [
+						{
+							id: "r1",
+							position: "Junior Engineer",
+							period: "whenever",
+							description: "<p>Work.</p>",
+							keepTogether: false,
+						},
+					],
 				}),
 			];
 		});
@@ -188,6 +198,7 @@ describe("date rules", () => {
 				{
 					id: "a1",
 					hidden: false,
+					keepTogether: false,
 					title: "Turing Award",
 					awarder: "ACM",
 					date: "some time ago",
@@ -219,6 +230,7 @@ describe("structure rules", () => {
 				{
 					id: "e1",
 					hidden: false,
+					keepTogether: false,
 					school: "University of London",
 					degree: "BSc",
 					area: "Mathematics",
@@ -259,7 +271,15 @@ describe("structure rules", () => {
 			resume.sections.experience.items = [
 				experienceItem({
 					description: "",
-					roles: [{ id: "r1", position: "Engineer", period: "2020 - 2022", description: "<p>Shipped it.</p>" }],
+					roles: [
+						{
+							id: "r1",
+							position: "Engineer",
+							period: "2020 - 2022",
+							description: "<p>Shipped it.</p>",
+							keepTogether: false,
+						},
+					],
 				}),
 			];
 		});
@@ -302,7 +322,15 @@ describe("cover letter sections", () => {
 					hidden: false,
 					keepTogether: false,
 					startOnNewPage: false,
-					items: [{ id: "c1", hidden: false, recipient: "<p>Hiring Manager</p>", content: "<p>Dear team,</p>" }],
+					items: [
+						{
+							id: "c1",
+							hidden: false,
+							keepTogether: false,
+							recipient: "<p>Hiring Manager</p>",
+							content: "<p>Dear team,</p>",
+						},
+					],
 				},
 			];
 			resume.metadata.layout.pages = [{ fullWidth: false, main: ["experience", "cover"], sidebar: [] }];
@@ -338,6 +366,7 @@ describe("layout rules", () => {
 				{
 					id: "s1",
 					hidden: false,
+					keepTogether: false,
 					icon: "",
 					iconColor: "",
 					name: "Mathematics",

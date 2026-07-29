@@ -38,6 +38,7 @@ const buildFixture = (template: Template, rule = ""): ResumeData => {
 	data.sections.skills.title = "Expertise";
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "skill-1",
 			hidden: false,
 			icon: "",
@@ -72,6 +73,7 @@ const finalOnyxCompanyStyle = async (keyword?: "inherit" | "initial" | "revert" 
 	data.metadata.typography.body.fontWeights = ["400", "500"];
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience-1",
 			hidden: false,
 			company: "Analytical Engines",

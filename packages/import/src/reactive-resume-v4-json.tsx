@@ -253,6 +253,7 @@ const baseSection = (section?: V4SectionHeader) => ({
 const itemBase = (item: V4Item) => ({
 	id: item.id ?? generateId(),
 	hidden: !(item.visible ?? true),
+	keepTogether: false,
 });
 
 const toWebsite = (url?: V4Url) => ({

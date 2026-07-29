@@ -476,6 +476,7 @@ const buildFixture = (): ResumeData => {
 	data.sections.experience.columns = 1;
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience/1",
 			hidden: false,
 			company: "Analytical Engines",
@@ -491,6 +492,7 @@ const buildFixture = (): ResumeData => {
 		{
 			id: "projects/1",
 			hidden: false,
+			keepTogether: false,
 			name: "Analytical Engine",
 			period: "1843",
 			website: { url: "https://project.example.com", label: "Project", inlineLink: true },
@@ -499,6 +501,7 @@ const buildFixture = (): ResumeData => {
 	];
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "skills/1",
 			hidden: false,
 			icon: "code",
@@ -588,6 +591,7 @@ describe("template semantic manifests", () => {
 		data.sections.volunteer.hidden = false;
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience/inline",
 				hidden: false,
 				company: "Analytical Engines",
@@ -599,6 +603,7 @@ describe("template semantic manifests", () => {
 				roles: [],
 			},
 			{
+				keepTogether: false,
 				id: "experience/nested",
 				hidden: false,
 				company: "Difference Engines",
@@ -609,6 +614,7 @@ describe("template semantic manifests", () => {
 				description: "",
 				roles: [
 					{
+						keepTogether: false,
 						id: "role/1",
 						position: "Programmer",
 						period: "1843",
@@ -619,6 +625,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education/coverage",
 				hidden: false,
 				school: "University",
@@ -633,6 +640,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.volunteer.items = [
 			{
+				keepTogether: false,
 				id: "volunteer/coverage",
 				hidden: false,
 				organization: "Volunteer Guild",
@@ -646,6 +654,7 @@ describe("template semantic manifests", () => {
 			{
 				id: "award/coverage",
 				hidden: false,
+				keepTogether: false,
 				title: "Order of Merit",
 				awarder: "Royal Society",
 				date: "1844",
@@ -965,10 +974,11 @@ describe("template semantic manifests", () => {
 	it("emits Ditgar's existing item-header border owner for language and reference items", () => {
 		const data = buildFixture();
 		data.sections.languages.items = [
-			{ id: "language/1", hidden: false, language: "English", fluency: "Native", level: 4 },
+			{ keepTogether: false, id: "language/1", hidden: false, language: "English", fluency: "Native", level: 4 },
 		];
 		data.sections.references.items = [
 			{
+				keepTogether: false,
 				id: "reference/1",
 				hidden: false,
 				name: "Charles Babbage",
@@ -1001,10 +1011,11 @@ describe("template semantic manifests", () => {
 		data.sections.languages.hidden = false;
 		data.sections.references.hidden = false;
 		data.sections.languages.items = [
-			{ id: "language/empty", hidden: false, language: "English", fluency: "", level: 4 },
+			{ keepTogether: false, id: "language/empty", hidden: false, language: "English", fluency: "", level: 4 },
 		];
 		data.sections.references.items = [
 			{
+				keepTogether: false,
 				id: "reference/empty",
 				hidden: false,
 				name: "Charles Babbage",
@@ -1039,6 +1050,7 @@ describe("template semantic manifests", () => {
 		data.sections.volunteer.hidden = false;
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience/empty",
 				hidden: false,
 				company: "Analytical Engines",
@@ -1052,6 +1064,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education/empty",
 				hidden: false,
 				school: "University",
@@ -1066,6 +1079,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.volunteer.items = [
 			{
+				keepTogether: false,
 				id: "volunteer/empty",
 				hidden: false,
 				organization: "Volunteer Guild",
@@ -1106,6 +1120,7 @@ describe("template semantic manifests", () => {
 		data.sections.volunteer.hidden = false;
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience/routing",
 				hidden: false,
 				company: "Analytical Engines",
@@ -1119,6 +1134,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education/routing",
 				hidden: false,
 				school: "University",
@@ -1133,6 +1149,7 @@ describe("template semantic manifests", () => {
 		];
 		data.sections.volunteer.items = [
 			{
+				keepTogether: false,
 				id: "volunteer/routing",
 				hidden: false,
 				organization: "Volunteer Guild",

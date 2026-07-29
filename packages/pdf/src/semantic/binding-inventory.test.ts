@@ -123,6 +123,7 @@ describe("semantic binding inventory", () => {
 			"<h1>Heading</h1><blockquote>Quote</blockquote><p><strong>Bold</strong><br></p><ul><li>Item</li></ul><hr>";
 		data.sections.skills.items = [
 			{
+				keepTogether: false,
 				id: "skill/1",
 				hidden: false,
 				icon: "code",
@@ -156,10 +157,11 @@ describe("semantic binding inventory", () => {
 	it("does not claim item-header Views for direct language and reference Text siblings", () => {
 		const data = structuredClone(defaultResumeData);
 		data.sections.languages.items = [
-			{ id: "language-1", hidden: false, language: "English", fluency: "Native", level: 0 },
+			{ keepTogether: false, id: "language-1", hidden: false, language: "English", fluency: "Native", level: 0 },
 		];
 		data.sections.references.items = [
 			{
+				keepTogether: false,
 				id: "reference-1",
 				hidden: false,
 				name: "Charles Babbage",
@@ -200,6 +202,7 @@ describe("semantic binding inventory", () => {
 		data.summary.content = "<p>Summary</p>";
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience/1",
 				hidden: false,
 				company: "Analytical Engines",
@@ -224,6 +227,7 @@ describe("semantic binding inventory", () => {
 				startOnNewPage: false,
 				items: [
 					{
+						keepTogether: false,
 						id: "cover/1",
 						hidden: false,
 						recipient: "<p>Recipient</p>",
@@ -357,6 +361,7 @@ describe("semantic binding inventory", () => {
 		data.basics.email = "ada@example.com";
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education-1",
 				hidden: false,
 				school: "University of London",

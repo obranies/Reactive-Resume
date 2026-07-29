@@ -63,6 +63,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-3d42ddc9b4d8",
 					hidden: false,
+					keepTogether: false,
 					icon: "github-logo",
 					iconColor: "",
 					network: "GitHub",
@@ -76,6 +77,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-43c470b77f4a",
 					hidden: false,
+					keepTogether: false,
 					icon: "linkedin-logo",
 					iconColor: "",
 					network: "LinkedIn",
@@ -100,6 +102,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-44d8cec98ca4",
 					hidden: false,
+					keepTogether: false,
 					company: "Cascade Studios",
 					position: "Senior Game Developer",
 					location: "Seattle, WA",
@@ -127,6 +130,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-48455f6cef9e",
 					hidden: false,
+					keepTogether: false,
 					school: "University of Washington",
 					degree: "Bachelor of Science",
 					area: "Computer Science",
@@ -155,6 +159,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-4d2603fe2801",
 					hidden: false,
+					keepTogether: false,
 					name: "Echoes of the Void (Indie Game)",
 					period: "2023 - Present",
 					website: {
@@ -168,6 +173,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-524195dd7eff",
 					hidden: false,
+					keepTogether: false,
 					name: "Open Source: Unity Dialogue Framework",
 					period: "2021 - 2023",
 					website: {
@@ -181,6 +187,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-549106273c73",
 					hidden: false,
+					keepTogether: false,
 					name: "Game Jam Participation",
 					period: "2019 - Present",
 					website: {
@@ -207,6 +214,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-5a52dcf50ed4",
 					hidden: false,
+					keepTogether: false,
 					icon: "code",
 					iconColor: "",
 					name: "Unity Engine",
@@ -217,6 +225,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-5e8bb7cacbc8",
 					hidden: false,
+					keepTogether: false,
 					icon: "brackets-curly",
 					iconColor: "",
 					name: "Unreal Engine",
@@ -227,6 +236,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-622f9d41da55",
 					hidden: false,
+					keepTogether: false,
 					icon: "cpu",
 					iconColor: "",
 					name: "Programming Languages",
@@ -237,6 +247,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-6574ab6814bd",
 					hidden: false,
+					keepTogether: false,
 					icon: "brain",
 					iconColor: "",
 					name: "Game AI",
@@ -247,6 +258,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-6a8e22bec684",
 					hidden: false,
+					keepTogether: false,
 					icon: "shooting-star",
 					iconColor: "",
 					name: "Physics & Mathematics",
@@ -257,6 +269,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-6d8bf7be7514",
 					hidden: true,
+					keepTogether: false,
 					icon: "chart-line-up",
 					iconColor: "",
 					name: "Performance Optimization",
@@ -278,6 +291,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-73807ccc48b5",
 					hidden: false,
+					keepTogether: false,
 					language: "English",
 					fluency: "Native",
 					level: 5,
@@ -285,6 +299,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-768670459358",
 					hidden: false,
+					keepTogether: false,
 					language: "Polish",
 					fluency: "Conversational",
 					level: 3,
@@ -303,6 +318,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-7821b4de95f7",
 					hidden: false,
+					keepTogether: false,
 					icon: "game-controller",
 					iconColor: "",
 					name: "Game Design",
@@ -311,6 +327,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-7c64c1a607d3",
 					hidden: false,
+					keepTogether: false,
 					icon: "robot",
 					iconColor: "",
 					name: "AI & Procedural Generation",
@@ -319,6 +336,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-80bccce3c0ef",
 					hidden: false,
+					keepTogether: false,
 					icon: "book-open",
 					iconColor: "",
 					name: "Indie Game Development",
@@ -327,6 +345,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-84bb7e9af005",
 					hidden: false,
+					keepTogether: false,
 					icon: "pen-nib",
 					iconColor: "",
 					name: "Technical Art",
@@ -346,6 +365,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-8a8bb9fbe182",
 					hidden: false,
+					keepTogether: false,
 					title: "Best Gameplay - Ludum Dare 48",
 					awarder: "Ludum Dare",
 					date: "April 2021",
@@ -360,6 +380,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-8dd81379c7c9",
 					hidden: false,
+					keepTogether: false,
 					title: "Employee Excellence Award",
 					awarder: "Pixel Forge Interactive",
 					date: "December 2021",
@@ -385,6 +406,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-91fe8a4dfea6",
 					hidden: false,
+					keepTogether: false,
 					title: "Unity Certified Expert: Programmer",
 					issuer: "Unity Technologies",
 					date: "March 2022",
@@ -398,6 +420,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-961afccc2508",
 					hidden: false,
+					keepTogether: false,
 					title: "Unreal Engine 5 C++ Developer",
 					issuer: "Epic Games (Udemy)",
 					date: "June 2023",
@@ -422,6 +445,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-9816f0081895",
 					hidden: false,
+					keepTogether: false,
 					title: "Optimizing Unity Games for Mobile: A Practical Guide",
 					publisher: "Game Developer Magazine",
 					date: "September 2021",
@@ -436,6 +460,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-9cf55c272c05",
 					hidden: false,
+					keepTogether: false,
 					title: "Building Modular Dialogue Systems",
 					publisher: "Seattle Indie Game Developers Meetup",
 					date: "May 2022",
@@ -461,6 +486,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-a02580473e05",
 					hidden: false,
+					keepTogether: false,
 					organization: "Seattle Indies",
 					location: "Seattle, WA",
 					period: "2020 - Present",
@@ -475,6 +501,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-a731c5b1b286",
 					hidden: false,
+					keepTogether: false,
 					organization: "Code.org Game Development Workshops",
 					location: "Seattle, WA",
 					period: "2021 - Present",
@@ -500,6 +527,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-93e4-7746-ad39-a945c0f42dd5",
 					hidden: false,
+					keepTogether: false,
 					name: "Available upon request",
 					position: "",
 					website: {
@@ -528,6 +556,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-d1fa-7289-a87c-2677688d9e75",
 					hidden: false,
+					keepTogether: false,
 					company: "Pixel Forge Interactive",
 					position: "Game Developer",
 					location: "Bellevue, WA",
@@ -544,6 +573,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5a-db0e-73c6-9b6e-4471703864f1",
 					hidden: false,
+					keepTogether: false,
 					company: "Mobile Games Studio",
 					position: "Junior Game Developer",
 					location: "Remote",
@@ -573,6 +603,7 @@ export const sampleResumeData: ResumeData = {
 				{
 					id: "019bef5b-0f8d-77d1-9b2a-4a1b65e1b8aa",
 					hidden: false,
+					keepTogether: false,
 					recipient:
 						'<p>Hiring Manager<br />Sunrise Games Studio<br />Seattle, WA<br /><a href="mailto:hiring@sunrisegames.com">hiring@sunrisegames.com</a></p>',
 					content:

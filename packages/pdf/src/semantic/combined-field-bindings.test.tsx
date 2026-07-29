@@ -43,6 +43,7 @@ const fixture = (mode: "legacy" | "semantic", section: "experience" | "education
 	data.basics.email = "";
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience-1",
 			hidden: false,
 			company: "Analytical Engines",
@@ -56,6 +57,7 @@ const fixture = (mode: "legacy" | "semantic", section: "experience" | "education
 	];
 	data.sections.education.items = [
 		{
+			keepTogether: false,
 			id: "education-1",
 			hidden: false,
 			school: "Cambridge",
