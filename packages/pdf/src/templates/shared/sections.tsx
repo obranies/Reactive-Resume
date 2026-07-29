@@ -98,6 +98,7 @@ type SectionItemProps = {
 	itemId: string;
 	children: ReactNode;
 	style?: StyleInput;
+	noBreak?: boolean;
 };
 
 type InlineItemHeaderProps = {
@@ -212,6 +213,16 @@ const getSectionHeadingTextStyle = (...styles: StyleInput[]): Style[] =>
 	);
 
 const useSectionItemsContext = () => use(SectionItemsContext);
+
+// react-pdf types `wrap` as `wrap?: boolean`, so under exactOptionalPropertyTypes the prop has to
+// be omitted entirely rather than passed as undefined. Same idiom as breakProps in SectionShell.
+//
+// Ceiling: wrap={false} only holds a block that still fits on one page. A taller block is neither
+// split nor truncated — Yoga shrinks its children into the remaining height, so the block is
+// squashed into overlapping, unreadable lines (measured on A4/onyx: 21pt line spacing collapsing to
+// 8.4pt at an unchanged 10pt font size, plus a trailing blank page). So never set this on a shape
+// that can outgrow a page; that is why the Experience section routes the flag to roles instead.
+const getNoBreakProps = (noBreak: boolean | undefined): { wrap?: false } => (noBreak ? { wrap: false } : {});
 
 export const SemanticTextRuns = ({
 	runs,
@@ -476,7 +487,7 @@ const SectionItems = ({ children, columns = 1 }: SectionItemsProps) => {
 	);
 };
 
-const SectionItem = ({ itemId, children, style }: SectionItemProps) => {
+const SectionItem = ({ itemId, children, style, noBreak }: SectionItemProps) => {
 	const sectionItemsNodeKey = useSemanticNodeKey();
 	const itemNodeKey = sectionItemsNodeKey ? semanticNodeKeys.item(sectionItemsNodeKey, itemId) : undefined;
 	const visible = useSemanticNodeVisible(itemNodeKey);
@@ -489,12 +500,28 @@ const SectionItem = ({ itemId, children, style }: SectionItemProps) => {
 	const timelineContentStyle = useTemplateFeatureStyle("sectionTimeline", "content");
 	const timelineContentNodeKey = semanticTemplatePartNodeKey(itemNodeKey, "timeline-content");
 	const timelineContentResolved = useResolvedNode(timelineContentNodeKey);
+	// Applied to the item root in both branches: in timeline mode that is the row wrapping the
+	// marker and the content, so the dot cannot end up on a different page than its item.
+	const noBreakProps = getNoBreakProps(noBreak);
 	if (!visible) return null;
 
 	if (!useTimeline) {
 		return (
 			<SemanticNodeKeyProvider nodeKey={itemNodeKey}>
-				<Div nodeKey={itemNodeKey} style={composeStyles(itemStyle, itemRuleStyle, sectionItemStyle, style)}>
+				{/*
+				 * Precedence: Div renders <View {...props} {...resolvedPdfFlowProps(resolved)} />, so a
+				 * `wrap` coming from the resolved node silently wins over the one passed here — no type
+				 * error, no warning. resolvedPdfFlowProps only emits `wrap` when the node actually carries
+				 * a break-inside declaration (adaptResolvedPdfNode maps "avoid" to wrap={false}), so today
+				 * this only triggers for a stylesheet rule on the item node, and it resolves to the same
+				 * value the flag would set. It stops being harmless the moment base-styles grows a
+				 * break-inside rule for item nodes — then that base value would override keepTogether.
+				 */}
+				<Div
+					nodeKey={itemNodeKey}
+					{...noBreakProps}
+					style={composeStyles(itemStyle, itemRuleStyle, sectionItemStyle, style)}
+				>
 					{children}
 				</Div>
 			</SemanticNodeKeyProvider>
@@ -503,7 +530,13 @@ const SectionItem = ({ itemId, children, style }: SectionItemProps) => {
 
 	return (
 		<SemanticNodeKeyProvider nodeKey={itemNodeKey}>
-			<View style={composeStyles(timelineItemStyle)}>
+			{/*
+			 * noBreak goes on this outer row rather than the content Div below: the row is what pairs
+			 * the marker with the content, so keeping it together is what stops the dot from landing on
+			 * a different page than its item. This is a plain View, not Div, so no resolved node value
+			 * competes with the prop here.
+			 */}
+			<View style={composeStyles(timelineItemStyle)} {...noBreakProps}>
 				<SemanticTemplatePartView
 					ownerNodeKey={itemNodeKey}
 					partKeys={["timeline-marker"]}
@@ -728,7 +761,7 @@ const CustomSummarySection = ({ section, showHeading = true }: CustomSummarySect
 		<SectionShell sectionId={section.id} title={section.title} showHeading={showHeading}>
 			<SectionItems columns={section.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<RichText semanticField="content">{item.content}</RichText>
 					</SectionItem>
 				))}
@@ -749,7 +782,7 @@ const ProfileSection = ({ sectionId = "profiles", sectionData }: ItemSectionProp
 		<SectionShell sectionId={sectionId} title={profiles.title}>
 			<SectionItems columns={profiles.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<View style={composeStyles(inlineStyle)}>
 								<Icon name={item.icon as IconName} />
@@ -786,7 +819,19 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 		nodeKey: itemNodeKey ? semanticNodeKeys.item(itemNodeKey, role.id) : role.id,
 		value: (
 			<SemanticItemNodeKeyProvider key={role.id} itemId={role.id}>
-				<Div bindCurrentNode>
+				{/*
+				 * This is where the Experience item flag lands: the item root stays breakable whenever
+				 * roles exist (see ExperienceSection), and keepTogether is honoured per role here, on a
+				 * block small enough to stay under the getNoBreakProps ceiling.
+				 *
+				 * Precedence: Div renders <View {...props} {...resolvedPdfFlowProps(resolved)} />, so a
+				 * `wrap` from the resolved role node silently overrides the one spread here — no type
+				 * error, no warning. resolvedPdfFlowProps only emits `wrap` when the node carries a
+				 * break-inside declaration, so today only a stylesheet rule targeting this role can do
+				 * that, and it resolves to the same value the flag would set. Revisit if base-styles ever
+				 * grows a break-inside rule for item nodes: that value would then beat keepTogether.
+				 */}
+				<Div bindCurrentNode {...getNoBreakProps(role.keepTogether)}>
 					<SectionItemHeader>
 						<View style={composeStyles(splitRowStyle)}>
 							<Text semanticField="position">{role.position}</Text>
@@ -914,7 +959,12 @@ const ExperienceSection = ({ sectionId = "experience", sectionData }: ItemSectio
 					);
 
 					return (
-						<SectionItem key={item.id} itemId={item.id}>
+						// An item with role progression is the one shape that routinely outgrows a page, and an
+						// oversized wrap={false} block gets squashed into unreadable overlapping lines (see the
+						// ceiling on getNoBreakProps). So the company block stays breakable and the flag is
+						// honoured per role instead — each role keeps its own title and description together.
+						// The per-role wiring lives in ExperienceItemContent, which owns the role loop.
+						<SectionItem key={item.id} itemId={item.id} noBreak={item.roles.length > 0 ? false : item.keepTogether}>
 							<ExperienceItemContent
 								item={item}
 								header={
@@ -1093,7 +1143,7 @@ const EducationSection = ({ sectionId = "education", sectionData }: ItemSectionP
 					);
 
 					return (
-						<SectionItem key={item.id} itemId={item.id}>
+						<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 							<EducationItemContent
 								item={item}
 								header={
@@ -1121,7 +1171,7 @@ const ProjectsSection = ({ sectionId = "projects", sectionData }: ItemSectionPro
 		<SectionShell sectionId={sectionId} title={projects.title}>
 			<SectionItems columns={projects.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<ItemHeaderRow style={composeStyles(splitRowStyle)}>
 								<ItemTitle field="name" website={item.website}>
@@ -1156,7 +1206,12 @@ const SkillsSection = ({ sectionId = "skills", sectionData }: ItemSectionProps<S
 		<SectionShell sectionId={sectionId} title={skills.title}>
 			<SectionItems columns={skills.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id} style={{ rowGap: metrics.gapY(0.25) }}>
+					<SectionItem
+						key={item.id}
+						itemId={item.id}
+						noBreak={item.keepTogether}
+						style={{ rowGap: metrics.gapY(0.25) }}
+					>
 						<SectionItemHeader>
 							<View style={composeStyles(inlineStyle)}>
 								<Icon name={item.icon as IconName} />
@@ -1190,7 +1245,7 @@ const LanguagesSection = ({ sectionId = "languages", sectionData }: ItemSectionP
 		<SectionShell sectionId={sectionId} title={languages.title}>
 			<SectionItems columns={languages.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<Bold semanticField="language">{item.language}</Bold>
 							<Text semanticField="fluency">{item.fluency}</Text>
@@ -1215,7 +1270,7 @@ const InterestsSection = ({ sectionId = "interests", sectionData }: ItemSectionP
 		<SectionShell sectionId={sectionId} title={interests.title}>
 			<SectionItems columns={interests.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<View style={composeStyles(inlineStyle)}>
 								<Icon name={item.icon as IconName} />
@@ -1244,7 +1299,7 @@ const AwardsSection = ({ sectionId = "awards", sectionData }: ItemSectionProps<A
 		<SectionShell sectionId={sectionId} title={awards.title}>
 			<SectionItems columns={awards.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<ItemHeaderRow style={composeStyles(splitRowStyle, awardTitleDateRowStyle)}>
 								<ItemTitle field="title" website={item.website} bold={false}>
@@ -1282,7 +1337,7 @@ const CertificationsSection = ({
 		<SectionShell sectionId={sectionId} title={certifications.title}>
 			<SectionItems columns={certifications.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<ItemHeaderRow style={composeStyles(splitRowStyle)}>
 								<ItemTitle field="title" website={item.website}>
@@ -1318,7 +1373,7 @@ const PublicationsSection = ({ sectionId = "publications", sectionData }: ItemSe
 		<SectionShell sectionId={sectionId} title={publications.title}>
 			<SectionItems columns={publications.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<ItemHeaderRow style={composeStyles(splitRowStyle)}>
 								<ItemTitle field="title" website={item.website}>
@@ -1357,7 +1412,7 @@ const VolunteerSection = ({ sectionId = "volunteer", sectionData }: ItemSectionP
 			<SectionItems columns={volunteer.columns}>
 				{items.map((item) => {
 					return (
-						<SectionItem key={item.id} itemId={item.id}>
+						<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 							<SectionItemHeader>
 								{inlineItemHeader ? (
 									<InlineItemHeader
@@ -1414,7 +1469,7 @@ const ReferencesSection = ({ sectionId = "references", sectionData }: ItemSectio
 		<SectionShell sectionId={sectionId} title={references.title}>
 			<SectionItems columns={references.columns}>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<SectionItemHeader>
 							<ItemTitle field="name" website={item.website}>
 								{item.name}
@@ -1441,7 +1496,7 @@ const CoverLetterSection = ({ section }: CoverLetterSectionProps) => {
 		<SectionShell sectionId={section.id} title={section.title} showHeading={false}>
 			<SectionItems>
 				{items.map((item) => (
-					<SectionItem key={item.id} itemId={item.id}>
+					<SectionItem key={item.id} itemId={item.id} noBreak={item.keepTogether}>
 						<RichText semanticField="recipient">{item.recipient}</RichText>
 						<RichText semanticField="content">{item.content}</RichText>
 					</SectionItem>
