@@ -334,8 +334,13 @@ const SectionShell = ({ sectionId, title, showHeading = true, children }: Sectio
 	// Only set the props when enabled so we never pass undefined (exactOptionalPropertyTypes).
 	const breakProps: { wrap?: false; break?: true } = {};
 	// ponytail: react-pdf ceiling — wrap={false} keeps a section together only if it fits on
-	// one page; a section taller than a full page is clipped, not split. No upgrade path in
-	// react-pdf, so the layout UI warns users this only works for sections that fit one page.
+	// one page. An oversized section is not split, but "clipped" understates it: the same flag
+	// measured at item level does not truncate, it lets Yoga shrink the children into the
+	// remaining height, squashing the block into overlapping lines plus a trailing blank page
+	// (see getNoBreakProps). Presumed to be the same mechanism here since it is the same react-pdf
+	// prop, but that was measured at item level and not verified separately for sections. Either
+	// way there is no upgrade path in react-pdf, so the layout UI warns users this only works for
+	// sections that fit one page.
 	if (keepTogether) breakProps.wrap = false;
 	if (startOnNewPage) breakProps.break = true;
 	const flowProps = { ...breakProps, ...resolvedPdfFlowProps(resolved) };
