@@ -12,6 +12,7 @@ import { useFormBlocker } from "@/hooks/use-form-blocker";
 import { makeSectionItem } from "@/libs/resume/make-section-item";
 import { createSectionItem, updateSectionItem } from "@/libs/resume/section-actions";
 import { useAppForm, withForm } from "@/libs/tanstack-form";
+import { KeepTogetherField } from "./keep-together-field";
 import { SectionItemDialog } from "./section-item-dialog";
 
 const formSchema = projectItemSchema;
@@ -130,6 +131,18 @@ const ProjectForm = withForm({
 								<Trans>Show link in title</Trans>
 							</FormLabel>
 						</FormItem>
+					)}
+				</form.Field>
+
+				<form.Field name="keepTogether">
+					{(field) => (
+						<KeepTogetherField
+							variant="item"
+							checked={field.state.value}
+							onCheckedChange={(checked) => {
+								field.handleChange(checked);
+							}}
+						/>
 					)}
 				</form.Field>
 

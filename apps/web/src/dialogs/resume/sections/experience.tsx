@@ -18,6 +18,7 @@ import { useFormBlocker } from "@/hooks/use-form-blocker";
 import { makeSectionItem } from "@/libs/resume/make-section-item";
 import { createSectionItem, updateSectionItem } from "@/libs/resume/section-actions";
 import { useAppForm, withForm } from "@/libs/tanstack-form";
+import { KeepTogetherField } from "./keep-together-field";
 import { SectionItemDialog } from "./section-item-dialog";
 
 const formSchema = experienceItemSchema;
@@ -149,6 +150,19 @@ const ExperienceForm = withForm({
 								<Trans>Show link in title</Trans>
 							</FormLabel>
 						</FormItem>
+					)}
+				</form.Field>
+
+				<form.Field name="keepTogether">
+					{(field) => (
+						<KeepTogetherField
+							variant="item"
+							supersededByRoles={hasRoles}
+							checked={field.state.value}
+							onCheckedChange={(checked) => {
+								field.handleChange(checked);
+							}}
+						/>
 					)}
 				</form.Field>
 
@@ -321,6 +335,18 @@ const RoleFields = withForm({
 								<FormControl render={<RichInput value={field.state.value} onChange={(v) => field.handleChange(v)} />} />
 								<FormMessage errors={field.state.meta.errors} />
 							</FormItem>
+						)}
+					</form.Field>
+
+					<form.Field name={`roles[${index}].keepTogether`}>
+						{(field) => (
+							<KeepTogetherField
+								variant="role"
+								checked={field.state.value}
+								onCheckedChange={(checked) => {
+									field.handleChange(checked);
+								}}
+							/>
 						)}
 					</form.Field>
 				</div>
