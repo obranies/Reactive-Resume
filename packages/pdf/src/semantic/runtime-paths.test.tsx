@@ -60,6 +60,7 @@ const buildNodeBudgetFixture = (mode: "legacy" | "semantic"): ResumeData => {
 	data.metadata.layout.pages = [{ fullWidth: true, main: ["skills"], sidebar: [] }];
 	data.metadata.stylesheet = { mode, source };
 	data.sections.skills.items = Array.from({ length: 2_000 }, (_, index) => ({
+		keepTogether: false,
 		id: `skill-${index}`,
 		hidden: false,
 		icon: "",

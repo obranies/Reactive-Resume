@@ -57,6 +57,7 @@ const buildIssueFixture = (): ResumeData => {
 	};
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "item-1",
 			hidden: false,
 			company: "Analytical Engines",
@@ -70,6 +71,7 @@ const buildIssueFixture = (): ResumeData => {
 	];
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "item-1",
 			hidden: false,
 			icon: "",
@@ -242,6 +244,7 @@ describe("semantic issue fixtures", () => {
 	it("renders descriptor filtering and stable item order instead of remapping raw arrays", async () => {
 		const data = buildIssueFixture();
 		data.sections.skills.items = ["First", "Hidden", "Last"].map((name, index) => ({
+			keepTogether: false,
 			id: `item-${index + 1}`,
 			hidden: false,
 			icon: "",

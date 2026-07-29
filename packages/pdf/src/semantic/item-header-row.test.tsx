@@ -34,6 +34,7 @@ const buildFixture = (): ResumeData => {
 		{
 			id: "certification/1",
 			hidden: false,
+			keepTogether: false,
 			title: LONG_TITLE,
 			issuer: "Dicoding",
 			date: "05 Sep 2023",
@@ -45,6 +46,7 @@ const buildFixture = (): ResumeData => {
 		{
 			id: "experience/1",
 			hidden: false,
+			keepTogether: false,
 			company: "Braincore",
 			position: "Business Process Automation Engineer",
 			location: "Jakarta, Indonesia",

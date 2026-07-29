@@ -51,6 +51,7 @@ const buildFixture = (): ResumeData => {
 	};
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience/item",
 			hidden: false,
 			company: "Analytical Engines",
@@ -61,6 +62,7 @@ const buildFixture = (): ResumeData => {
 			description: "<p>Ignored when roles exist</p>",
 			roles: [
 				{
+					keepTogether: false,
 					id: "role/item",
 					position: "Programmer",
 					period: "1843",
@@ -93,6 +95,7 @@ const buildCompleteFixture = (): ResumeData => {
 	data.summary.content = richTextFixture;
 	data.sections.profiles.items = [
 		{
+			keepTogether: false,
 			id: "profile/1",
 			hidden: false,
 			icon: "github-logo",
@@ -104,6 +107,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience/1",
 			hidden: false,
 			company: "Analytical Engines",
@@ -113,11 +117,18 @@ const buildCompleteFixture = (): ResumeData => {
 			website: { url: "https://example.com/company", label: "Company", inlineLink: true },
 			description: "<p>Outer description</p>",
 			roles: [
-				{ id: "role/1", position: "Programmer", period: "1843", description: "<p>Role description</p>" },
-				{ id: "role/hidden", position: " ", period: "1844", description: "<p>Filtered role</p>" },
+				{
+					keepTogether: false,
+					id: "role/1",
+					position: "Programmer",
+					period: "1843",
+					description: "<p>Role description</p>",
+				},
+				{ keepTogether: false, id: "role/hidden", position: " ", period: "1844", description: "<p>Filtered role</p>" },
 			],
 		},
 		{
+			keepTogether: false,
 			id: "experience/2",
 			hidden: false,
 			company: "Difference Engine",
@@ -129,6 +140,7 @@ const buildCompleteFixture = (): ResumeData => {
 			roles: [],
 		},
 		{
+			keepTogether: false,
 			id: "hidden/item",
 			hidden: true,
 			company: "Hidden",
@@ -142,6 +154,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.education.items = [
 		{
+			keepTogether: false,
 			id: "education/1",
 			hidden: false,
 			school: "University",
@@ -156,6 +169,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.projects.items = [
 		{
+			keepTogether: false,
 			id: "project/1",
 			hidden: false,
 			name: "Engine",
@@ -164,6 +178,7 @@ const buildCompleteFixture = (): ResumeData => {
 			description: "<p>Project</p>",
 		},
 		{
+			keepTogether: false,
 			id: "project/invalid",
 			hidden: false,
 			name: " ",
@@ -174,6 +189,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "skill/1",
 			hidden: false,
 			icon: "code",
@@ -185,10 +201,11 @@ const buildCompleteFixture = (): ResumeData => {
 		},
 	];
 	data.sections.languages.items = [
-		{ id: "language/1", hidden: false, language: "English", fluency: "Native", level: 4 },
+		{ keepTogether: false, id: "language/1", hidden: false, language: "English", fluency: "Native", level: 4 },
 	];
 	data.sections.interests.items = [
 		{
+			keepTogether: false,
 			id: "interest/1",
 			hidden: false,
 			icon: "book",
@@ -199,6 +216,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.awards.items = [
 		{
+			keepTogether: false,
 			id: "award/1",
 			hidden: false,
 			title: "Prize",
@@ -210,6 +228,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.certifications.items = [
 		{
+			keepTogether: false,
 			id: "certification/1",
 			hidden: false,
 			title: "Certificate",
@@ -221,6 +240,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.publications.items = [
 		{
+			keepTogether: false,
 			id: "publication/1",
 			hidden: false,
 			title: "Notes",
@@ -232,6 +252,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.volunteer.items = [
 		{
+			keepTogether: false,
 			id: "volunteer/1",
 			hidden: false,
 			organization: "Society",
@@ -243,6 +264,7 @@ const buildCompleteFixture = (): ResumeData => {
 	];
 	data.sections.references.items = [
 		{
+			keepTogether: false,
 			id: "reference/1",
 			hidden: false,
 			name: "Charles",
@@ -587,6 +609,7 @@ describe("buildSemanticTree", () => {
 		const data = structuredClone(defaultResumeData);
 		data.sections.profiles.items = [
 			{
+				keepTogether: false,
 				id: "profile/1",
 				hidden: false,
 				icon: "github-logo",
@@ -644,6 +667,7 @@ describe("buildSemanticTree", () => {
 		const data = structuredClone(defaultResumeData);
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education-1",
 				hidden: false,
 				school: "University of London",

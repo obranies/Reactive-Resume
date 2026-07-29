@@ -107,6 +107,7 @@ describe("semantic sibling ordering reaches final PDF output", () => {
 		`);
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience-1",
 				hidden: false,
 				company: "Analytical Engines",
@@ -116,9 +117,9 @@ describe("semantic sibling ordering reaches final PDF output", () => {
 				website: { url: "https://example.com/company", label: "Company site", inlineLink: false },
 				description: "",
 				roles: [
-					{ id: "role-1", position: "First role", period: "", description: "" },
-					{ id: "role-2", position: "Hidden role", period: "", description: "" },
-					{ id: "role-3", position: "Last role", period: "", description: "" },
+					{ keepTogether: false, id: "role-1", position: "First role", period: "", description: "" },
+					{ keepTogether: false, id: "role-2", position: "Hidden role", period: "", description: "" },
+					{ keepTogether: false, id: "role-3", position: "Last role", period: "", description: "" },
 				],
 			},
 		];
@@ -138,6 +139,7 @@ describe("semantic sibling ordering reaches final PDF output", () => {
 		`);
 		data.sections.experience.items = [
 			{
+				keepTogether: false,
 				id: "experience-1",
 				hidden: false,
 				company: "Analytical Engines",
@@ -165,6 +167,7 @@ describe("semantic sibling ordering reaches final PDF output", () => {
 		`);
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education-1",
 				hidden: false,
 				school: "University of London",
@@ -192,6 +195,7 @@ describe("semantic sibling ordering reaches final PDF output", () => {
 		`);
 		data.sections.education.items = [
 			{
+				keepTogether: false,
 				id: "education-1",
 				hidden: false,
 				school: "University of London",

@@ -79,6 +79,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.profiles.items[]` | `object` | — | — | — |
 | `sections.profiles.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.profiles.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.profiles.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.profiles.items[].icon` | `string` | yes | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `sections.profiles.items[].iconColor` | `string` | no | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `sections.profiles.items[].network` | `string` | yes | minLength: 1 | The name of the network or platform. |
@@ -98,6 +99,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.experience.items[]` | `object` | — | — | — |
 | `sections.experience.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.experience.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.experience.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.experience.items[].company` | `string` | yes | minLength: 1 | The name of the company or organization. |
 | `sections.experience.items[].position` | `string` | yes | — | The position held at the company or organization. Used when there is only a single role. If multiple roles are provided in the 'roles' field, this serves as a summary title or can be left blank. |
 | `sections.experience.items[].location` | `string` | yes | — | The location of the company or organization. |
@@ -113,6 +115,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.experience.items[].roles[].position` | `string` | yes | — | The position or job title for this role. |
 | `sections.experience.items[].roles[].period` | `string` | yes | — | The period of time this role was held. |
 | `sections.experience.items[].roles[].description` | `string` | yes | — | The description of this specific role. This should be a HTML-formatted string. |
+| `sections.experience.items[].roles[].keepTogether` | `boolean` | no | default: false | If true, this role is kept together on a single page instead of splitting across a page break. |
 | `sections.education` | `object` | yes | — | The section to display the education of the author. |
 | `sections.education.title` | `string` | yes | — | The title of the section. |
 | `sections.education.icon` | `string` | no | default: "" | Phosphor icon name to display before the section title in the PDF output. Empty string uses the default section icon; 'none' hides the icon. |
@@ -124,6 +127,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.education.items[]` | `object` | — | — | — |
 | `sections.education.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.education.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.education.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.education.items[].school` | `string` | yes | minLength: 1 | The name of the school or institution. |
 | `sections.education.items[].degree` | `string` | yes | — | The degree or qualification obtained. |
 | `sections.education.items[].area` | `string` | yes | — | The area of study or specialization. |
@@ -146,6 +150,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.projects.items[]` | `object` | — | — | — |
 | `sections.projects.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.projects.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.projects.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.projects.items[].name` | `string` | yes | minLength: 1 | The name of the project. |
 | `sections.projects.items[].period` | `string` | yes | — | The period of time the project was worked on. |
 | `sections.projects.items[].website` | `object` | no | default: {"url":"","label":"","inlineLink":false} | The link to the project, if any. |
@@ -164,6 +169,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.skills.items[]` | `object` | — | — | — |
 | `sections.skills.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.skills.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.skills.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.skills.items[].icon` | `string` | yes | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `sections.skills.items[].iconColor` | `string` | no | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `sections.skills.items[].name` | `string` | yes | minLength: 1 | The name of the skill. |
@@ -182,6 +188,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.languages.items[]` | `object` | — | — | — |
 | `sections.languages.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.languages.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.languages.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.languages.items[].language` | `string` | yes | minLength: 1 | The name of the language the author knows. |
 | `sections.languages.items[].fluency` | `string` | yes | — | The fluency level of the language. Can be any text, such as 'Native', 'Fluent', 'Conversational', etc. or can also be a CEFR level (A1, A2, B1, B2, C1, C2). |
 | `sections.languages.items[].level` | `number` | no | minimum: 0; maximum: 5; default: 0 | The proficiency level of the language, defined as a number between 0 and 5. If set to 0, the icons displaying the level will be hidden. |
@@ -196,6 +203,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.interests.items[]` | `object` | — | — | — |
 | `sections.interests.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.interests.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.interests.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.interests.items[].icon` | `string` | yes | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `sections.interests.items[].iconColor` | `string` | no | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `sections.interests.items[].name` | `string` | yes | minLength: 1 | The name of the interest/hobby. |
@@ -212,6 +220,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.awards.items[]` | `object` | — | — | — |
 | `sections.awards.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.awards.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.awards.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.awards.items[].title` | `string` | yes | minLength: 1 | The title of the award. |
 | `sections.awards.items[].awarder` | `string` | yes | — | The awarder of the award. |
 | `sections.awards.items[].date` | `string` | yes | — | The date when the award was received. |
@@ -231,6 +240,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.certifications.items[]` | `object` | — | — | — |
 | `sections.certifications.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.certifications.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.certifications.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.certifications.items[].title` | `string` | yes | minLength: 1 | The title of the certification. |
 | `sections.certifications.items[].issuer` | `string` | yes | — | The issuer of the certification. |
 | `sections.certifications.items[].date` | `string` | yes | — | The date when the certification was received. |
@@ -250,6 +260,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.publications.items[]` | `object` | — | — | — |
 | `sections.publications.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.publications.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.publications.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.publications.items[].title` | `string` | yes | minLength: 1 | The title of the publication. |
 | `sections.publications.items[].publisher` | `string` | yes | — | The publisher of the publication. |
 | `sections.publications.items[].date` | `string` | yes | — | The date when the publication was published. |
@@ -269,6 +280,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.volunteer.items[]` | `object` | — | — | — |
 | `sections.volunteer.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.volunteer.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.volunteer.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.volunteer.items[].organization` | `string` | yes | minLength: 1 | The name of the organization or company. |
 | `sections.volunteer.items[].location` | `string` | yes | — | The location of the organization or company. |
 | `sections.volunteer.items[].period` | `string` | yes | — | The period of time the author was volunteered at the organization or company. |
@@ -288,6 +300,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `sections.references.items[]` | `object` | — | — | — |
 | `sections.references.items[].id` | `string` | yes | — | The unique identifier for the item. Usually generated as a UUID. |
 | `sections.references.items[].hidden` | `boolean` | yes | — | Whether to hide the item from the resume. |
+| `sections.references.items[].keepTogether` | `boolean` | no | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `sections.references.items[].name` | `string` | yes | minLength: 1 | The name of the reference, or a note such as 'Available upon request'. |
 | `sections.references.items[].position` | `string` | yes | — | The position or job title of the reference. |
 | `sections.references.items[].website` | `object` | no | default: {"url":"","label":"","inlineLink":false} | The website or LinkedIn profile of the reference, if any. |
@@ -311,6 +324,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type summary, schema summaryItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type summary, schema summaryItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type summary, schema summaryItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type summary, schema summaryItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].content` | `string` | yes (type summary, schema summaryItemSchema at customSections[]) | — | The rich text content of the summary item. This should be a HTML-formatted string. |
 | `customSections[]` | `object` | — (type profiles, schema profileItemSchema at customSections[]) | — | — |
 | `customSections[].title` | `string` | yes (type profiles, schema profileItemSchema at customSections[]) | — | The title of the section. |
@@ -325,6 +339,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type profiles, schema profileItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type profiles, schema profileItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type profiles, schema profileItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type profiles, schema profileItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].icon` | `string` | yes (type profiles, schema profileItemSchema at customSections[]) | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `customSections[].items[].iconColor` | `string` | no (type profiles, schema profileItemSchema at customSections[]) | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `customSections[].items[].network` | `string` | yes (type profiles, schema profileItemSchema at customSections[]) | minLength: 1 | The name of the network or platform. |
@@ -346,6 +361,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type experience, schema experienceItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type experience, schema experienceItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type experience, schema experienceItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].company` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | minLength: 1 | The name of the company or organization. |
 | `customSections[].items[].position` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The position held at the company or organization. Used when there is only a single role. If multiple roles are provided in the 'roles' field, this serves as a summary title or can be left blank. |
 | `customSections[].items[].location` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The location of the company or organization. |
@@ -361,6 +377,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[].roles[].position` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The position or job title for this role. |
 | `customSections[].items[].roles[].period` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The period of time this role was held. |
 | `customSections[].items[].roles[].description` | `string` | yes (type experience, schema experienceItemSchema at customSections[]) | — | The description of this specific role. This should be a HTML-formatted string. |
+| `customSections[].items[].roles[].keepTogether` | `boolean` | no (type experience, schema experienceItemSchema at customSections[]) | default: false | If true, this role is kept together on a single page instead of splitting across a page break. |
 | `customSections[]` | `object` | — (type education, schema educationItemSchema at customSections[]) | — | — |
 | `customSections[].title` | `string` | yes (type education, schema educationItemSchema at customSections[]) | — | The title of the section. |
 | `customSections[].icon` | `string` | no (type education, schema educationItemSchema at customSections[]) | default: "" | Phosphor icon name to display before the section title in the PDF output. Empty string uses the default section icon; 'none' hides the icon. |
@@ -374,6 +391,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type education, schema educationItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type education, schema educationItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type education, schema educationItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type education, schema educationItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].school` | `string` | yes (type education, schema educationItemSchema at customSections[]) | minLength: 1 | The name of the school or institution. |
 | `customSections[].items[].degree` | `string` | yes (type education, schema educationItemSchema at customSections[]) | — | The degree or qualification obtained. |
 | `customSections[].items[].area` | `string` | yes (type education, schema educationItemSchema at customSections[]) | — | The area of study or specialization. |
@@ -398,6 +416,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type projects, schema projectItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type projects, schema projectItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type projects, schema projectItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type projects, schema projectItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].name` | `string` | yes (type projects, schema projectItemSchema at customSections[]) | minLength: 1 | The name of the project. |
 | `customSections[].items[].period` | `string` | yes (type projects, schema projectItemSchema at customSections[]) | — | The period of time the project was worked on. |
 | `customSections[].items[].website` | `object` | no (type projects, schema projectItemSchema at customSections[]) | default: {"url":"","label":"","inlineLink":false} | The link to the project, if any. |
@@ -418,6 +437,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type skills, schema skillItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type skills, schema skillItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type skills, schema skillItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type skills, schema skillItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].icon` | `string` | yes (type skills, schema skillItemSchema at customSections[]) | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `customSections[].items[].iconColor` | `string` | no (type skills, schema skillItemSchema at customSections[]) | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `customSections[].items[].name` | `string` | yes (type skills, schema skillItemSchema at customSections[]) | minLength: 1 | The name of the skill. |
@@ -438,6 +458,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type languages, schema languageItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type languages, schema languageItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type languages, schema languageItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type languages, schema languageItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].language` | `string` | yes (type languages, schema languageItemSchema at customSections[]) | minLength: 1 | The name of the language the author knows. |
 | `customSections[].items[].fluency` | `string` | yes (type languages, schema languageItemSchema at customSections[]) | — | The fluency level of the language. Can be any text, such as 'Native', 'Fluent', 'Conversational', etc. or can also be a CEFR level (A1, A2, B1, B2, C1, C2). |
 | `customSections[].items[].level` | `number` | no (type languages, schema languageItemSchema at customSections[]) | minimum: 0; maximum: 5; default: 0 | The proficiency level of the language, defined as a number between 0 and 5. If set to 0, the icons displaying the level will be hidden. |
@@ -454,6 +475,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type interests, schema interestItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type interests, schema interestItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type interests, schema interestItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type interests, schema interestItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].icon` | `string` | yes (type interests, schema interestItemSchema at customSections[]) | — | The icon to display for the custom field. Must be a valid icon name from @phosphor-icons/web icon set, or an empty string to hide. Default to '' (empty string) when unsure which icons are available. |
 | `customSections[].items[].iconColor` | `string` | no (type interests, schema interestItemSchema at customSections[]) | default: "" | Custom color for the icon, defined as rgba(r, g, b, a). Leave blank to use the template default icon color. |
 | `customSections[].items[].name` | `string` | yes (type interests, schema interestItemSchema at customSections[]) | minLength: 1 | The name of the interest/hobby. |
@@ -472,6 +494,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type awards, schema awardItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type awards, schema awardItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type awards, schema awardItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type awards, schema awardItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].title` | `string` | yes (type awards, schema awardItemSchema at customSections[]) | minLength: 1 | The title of the award. |
 | `customSections[].items[].awarder` | `string` | yes (type awards, schema awardItemSchema at customSections[]) | — | The awarder of the award. |
 | `customSections[].items[].date` | `string` | yes (type awards, schema awardItemSchema at customSections[]) | — | The date when the award was received. |
@@ -493,6 +516,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type certifications, schema certificationItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type certifications, schema certificationItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type certifications, schema certificationItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type certifications, schema certificationItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].title` | `string` | yes (type certifications, schema certificationItemSchema at customSections[]) | minLength: 1 | The title of the certification. |
 | `customSections[].items[].issuer` | `string` | yes (type certifications, schema certificationItemSchema at customSections[]) | — | The issuer of the certification. |
 | `customSections[].items[].date` | `string` | yes (type certifications, schema certificationItemSchema at customSections[]) | — | The date when the certification was received. |
@@ -514,6 +538,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type publications, schema publicationItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type publications, schema publicationItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type publications, schema publicationItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type publications, schema publicationItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].title` | `string` | yes (type publications, schema publicationItemSchema at customSections[]) | minLength: 1 | The title of the publication. |
 | `customSections[].items[].publisher` | `string` | yes (type publications, schema publicationItemSchema at customSections[]) | — | The publisher of the publication. |
 | `customSections[].items[].date` | `string` | yes (type publications, schema publicationItemSchema at customSections[]) | — | The date when the publication was published. |
@@ -535,6 +560,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type volunteer, schema volunteerItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type volunteer, schema volunteerItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type volunteer, schema volunteerItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type volunteer, schema volunteerItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].organization` | `string` | yes (type volunteer, schema volunteerItemSchema at customSections[]) | minLength: 1 | The name of the organization or company. |
 | `customSections[].items[].location` | `string` | yes (type volunteer, schema volunteerItemSchema at customSections[]) | — | The location of the organization or company. |
 | `customSections[].items[].period` | `string` | yes (type volunteer, schema volunteerItemSchema at customSections[]) | — | The period of time the author was volunteered at the organization or company. |
@@ -556,6 +582,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type references, schema referenceItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type references, schema referenceItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type references, schema referenceItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type references, schema referenceItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].name` | `string` | yes (type references, schema referenceItemSchema at customSections[]) | minLength: 1 | The name of the reference, or a note such as 'Available upon request'. |
 | `customSections[].items[].position` | `string` | yes (type references, schema referenceItemSchema at customSections[]) | — | The position or job title of the reference. |
 | `customSections[].items[].website` | `object` | no (type references, schema referenceItemSchema at customSections[]) | default: {"url":"","label":"","inlineLink":false} | The website or LinkedIn profile of the reference, if any. |
@@ -577,6 +604,7 @@ Choose one coherent shape for each union value. Required fields are local to tha
 | `customSections[].items[]` | `object` | — (type cover-letter, schema coverLetterItemSchema at customSections[]) | — | — |
 | `customSections[].items[].id` | `string` | yes (type cover-letter, schema coverLetterItemSchema at customSections[]) | — | The unique identifier for the item. Usually generated as a UUID. |
 | `customSections[].items[].hidden` | `boolean` | yes (type cover-letter, schema coverLetterItemSchema at customSections[]) | — | Whether to hide the item from the resume. |
+| `customSections[].items[].keepTogether` | `boolean` | no (type cover-letter, schema coverLetterItemSchema at customSections[]) | default: false | If true, this item is kept together on a single page instead of splitting across a page break. |
 | `customSections[].items[].recipient` | `string` | yes (type cover-letter, schema coverLetterItemSchema at customSections[]) | — | The recipient's address block as HTML (name, title, company, address, email). |
 | `customSections[].items[].content` | `string` | yes (type cover-letter, schema coverLetterItemSchema at customSections[]) | — | The cover letter body as HTML (salutation, paragraphs, closing, signature). |
 | `metadata` | `object` | yes | — | Metadata for the resume, such as template, layout, typography, etc. This section describes the overall design and appearance of the resume. |

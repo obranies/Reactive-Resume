@@ -32,6 +32,7 @@ type FormValues = z.infer<typeof formSchema>;
 const defaultValues: FormValues = {
 	id: "",
 	hidden: false,
+	keepTogether: false,
 	icon: "acorn",
 	iconColor: "",
 	network: "",

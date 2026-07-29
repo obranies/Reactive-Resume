@@ -92,6 +92,7 @@ describe("removeItemFromSource", () => {
 			draft.sections.skills.items.push({
 				id: "skill-1",
 				hidden: false,
+				keepTogether: false,
 				icon: "",
 				iconColor: "",
 				name: "Go",
@@ -159,6 +160,7 @@ describe("addItemToSection", () => {
 		const item = {
 			id: "skill-x",
 			hidden: false,
+			keepTogether: false,
 			icon: "",
 			iconColor: "",
 			name: "Rust",

@@ -114,6 +114,10 @@ export const summarySchema = z.object({
 const baseItemSchema = z.object({
 	id: z.string().describe("The unique identifier for the item. Usually generated as a UUID."),
 	hidden: z.boolean().describe("Whether to hide the item from the resume."),
+	keepTogether: z
+		.boolean()
+		.catch(false)
+		.describe("If true, this item is kept together on a single page instead of splitting across a page break."),
 });
 
 export const summaryItemSchema = baseItemSchema.extend({
@@ -154,6 +158,10 @@ const roleItemSchema = z.object({
 	position: z.string().describe("The position or job title for this role."),
 	period: z.string().describe("The period of time this role was held."),
 	description: z.string().describe("The description of this specific role. This should be a HTML-formatted string."),
+	keepTogether: z
+		.boolean()
+		.catch(false)
+		.describe("If true, this role is kept together on a single page instead of splitting across a page break."),
 });
 
 export type RoleItem = z.infer<typeof roleItemSchema>;

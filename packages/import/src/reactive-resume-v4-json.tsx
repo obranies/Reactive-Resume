@@ -297,6 +297,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							icon: item.icon ?? "",
 							iconColor: "",
 							network: item.network ?? "",
@@ -320,6 +321,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							company: item.company ?? "",
 							position: item.position ?? "",
 							location: item.location ?? "",
@@ -345,6 +347,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							school: item.institution ?? "",
 							degree: item.studyType ?? "",
 							area: item.area ?? "",
@@ -371,6 +374,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							name: item.name ?? "",
 							period: item.date ?? "",
 							website: {
@@ -393,6 +397,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							icon: "",
 							iconColor: "",
 							name: item.name ?? "",
@@ -414,6 +419,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							language: item.name ?? "",
 							fluency: item.description ?? "",
 							// v4 stored language level as 0-10; scale down to v5's 0-5 range
@@ -432,6 +438,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							icon: "",
 							iconColor: "",
 							name: item.name ?? "",
@@ -450,6 +457,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							title: item.title ?? "",
 							awarder: item.awarder ?? "",
 							date: item.date ?? "",
@@ -473,6 +481,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							title: item.name ?? "",
 							issuer: item.issuer ?? "",
 							date: item.date ?? "",
@@ -496,6 +505,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							title: item.name ?? "",
 							publisher: item.publisher ?? "",
 							date: item.date ?? "",
@@ -519,6 +529,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							organization: item.organization ?? "",
 							location: item.location ?? "",
 							period: item.date ?? "",
@@ -542,6 +553,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 						.map((item) => ({
 							id: item.id ?? generateId(),
 							hidden: !(item.visible ?? true),
+							keepTogether: false,
 							name: item.name ?? "",
 							position: item.description ?? "",
 							phone: "",
@@ -568,6 +580,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 					return {
 						id: item.id || generateId(),
 						hidden: !(item.visible ?? true),
+						keepTogether: false,
 						company: item.name?.trim() || `#${index + 1}`,
 						// Only use description as subtitle when item has a name;
 						// otherwise description IS the primary content and goes to the body below

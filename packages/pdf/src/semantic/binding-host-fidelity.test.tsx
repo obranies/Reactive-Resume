@@ -49,6 +49,7 @@ const buildFixture = (
 	data.sections.skills.title = "Expertise";
 	data.sections.skills.items = [
 		{
+			keepTogether: false,
 			id: "skill-1",
 			hidden: false,
 			icon: "brain",
@@ -61,6 +62,7 @@ const buildFixture = (
 	];
 	data.sections.experience.items = [
 		{
+			keepTogether: false,
 			id: "experience-1",
 			hidden: false,
 			company: "Analytical Engines",
@@ -71,6 +73,7 @@ const buildFixture = (
 			description: "",
 			roles: [
 				{
+					keepTogether: false,
 					id: "role-1",
 					position: "Architect",
 					period: "1843",
@@ -80,10 +83,11 @@ const buildFixture = (
 		},
 	];
 	data.sections.languages.items = [
-		{ id: "language-1", hidden: false, language: "English", fluency: "Native", level: 0 },
+		{ keepTogether: false, id: "language-1", hidden: false, language: "English", fluency: "Native", level: 0 },
 	];
 	data.sections.references.items = [
 		{
+			keepTogether: false,
 			id: "reference-1",
 			hidden: false,
 			name: "Charles Babbage",
