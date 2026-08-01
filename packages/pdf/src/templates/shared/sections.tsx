@@ -634,6 +634,34 @@ const awardTitleDateRowStyle = {
 	justifyContent: "space-between",
 } satisfies Style;
 
+/**
+ * Keeps a role's period pinned to the right edge when the position title is long. Without this the
+ * title pushed the row past its width, splitRowStyle's flexWrap: "wrap" moved the period onto a
+ * line of its own, and with a single item on that line justify-content: space-between had nothing
+ * to distribute, so the date fell back to the left.
+ *
+ * flex: 1 resolves flexBasis to 0, so the title claims only free width and wraps its own text while
+ * the date keeps its auto basis, i.e. its content width. The row therefore never overflows in the
+ * first place and space-between puts the date on the right edge.
+ *
+ * Same mechanism ItemTitle's nowrapItemTitleStyle below relies on, for the reason explained there:
+ * react-pdf measures a Text node's lines once, at whatever width it first sees, and keeps reusing
+ * them, so a zero flex basis has to be in place before that first measurement rather than fixing the
+ * layout after the fact. This role row is a bare Text outside ItemTitle, so it needs its own copy of
+ * the same rule instead of picking up ItemHeaderRowNowrapContext.
+ *
+ * Two rules that look like the fix but are not, both confirmed by rendering:
+ * - flexWrap: "nowrap" on the row is redundant once the title has flex: 1, because the row can no
+ *   longer overflow. On its own it is actively worse: the date is drawn on top of the title rather
+ *   than pushed to the next line.
+ * - flexShrink: 0 on the date is silently inert, because the Text primitive composes safeTextStyle
+ *   last and that sets flexShrink: 1 back on every text node.
+ */
+const roleTitleStyle = {
+	flex: 1,
+	minWidth: 0,
+} satisfies Style;
+
 const useSectionSplitRowStyle = () => {
 	const placement = useTemplatePlacement();
 	const splitRowStyle = useTemplateStyle("splitRow");
@@ -839,7 +867,9 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 				<Div bindCurrentNode {...getNoBreakProps(role.keepTogether)}>
 					<SectionItemHeader>
 						<View style={composeStyles(splitRowStyle)}>
-							<Text semanticField="position">{role.position}</Text>
+							<Text semanticField="position" style={composeStyles(roleTitleStyle)}>
+								{role.position}
+							</Text>
 							<Text semanticField="period" style={composeStyles(alignEndStyle)}>
 								{role.period}
 							</Text>
