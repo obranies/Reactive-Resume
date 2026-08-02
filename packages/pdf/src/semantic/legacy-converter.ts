@@ -64,6 +64,15 @@ const slotSelectors = {
 	richLink: " rich-text link",
 	richBold: " rich-text strong",
 	richMark: " rich-text mark",
+	// Not in `styleSlots` yet, so `activeSlotChunks`/`disabledRuleChunk` never look these up at
+	// runtime: legacy CSS export still resolves company/position through the "text" selector
+	// above. Entries exist only to satisfy the exhaustive Record<StyleSlot, string> type; wiring
+	// them into the legacy stylesheet needs its own pass to confirm the nested-role selector
+	// convention (see the `item[role~="nested-role"]` case in textWeightSelector) rather than
+	// guessing it here.
+	companyName: ' field[name="company"]',
+	itemPosition: ' item:not([role~="nested-role"]) field[name="position"]',
+	roleTitle: ' item[role~="nested-role"] field[name="position"]',
 } as const satisfies Record<StyleSlot, string>;
 
 const selectorForSlot = (base: string, slot: StyleSlot): string => {

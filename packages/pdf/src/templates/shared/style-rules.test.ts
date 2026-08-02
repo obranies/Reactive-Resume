@@ -169,4 +169,36 @@ describe("resolveStyleRuleSlot", () => {
 			borderStyle: "dotted",
 		});
 	});
+
+	it("resolves companyName, itemPosition, and roleTitle independently of each other and of text", () => {
+		const data = createResumeData([
+			{
+				id: "experience-company",
+				label: "Experience Company",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { companyName: { color: "rgba(21, 93, 252, 1)" } },
+			},
+			{
+				id: "experience-item-position",
+				label: "Experience Item Position",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { itemPosition: { color: "rgba(220, 38, 38, 1)" } },
+			},
+			{
+				id: "experience-role-title",
+				label: "Experience Role Title",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { roleTitle: { color: "rgba(22, 163, 74, 1)" } },
+			},
+		]);
+		const context = { sectionId: "experience", sectionType: "experience" as const };
+
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "companyName" })).toEqual({ color: "#155dfc" });
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "itemPosition" })).toEqual({ color: "#dc2626" });
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "roleTitle" })).toEqual({ color: "#16a34a" });
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "text" })).toEqual({});
+	});
 });
