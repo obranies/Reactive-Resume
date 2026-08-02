@@ -688,6 +688,12 @@ msgstr "বর্ডার রেডিয়াস"
 msgid "Border Width"
 msgstr "বর্ডার প্রস্থ"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "আপনার নিজের জীবনবৃত্তান্ত তৈরি করুন"

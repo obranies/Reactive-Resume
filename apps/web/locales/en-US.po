@@ -683,6 +683,12 @@ msgstr "Border Radius"
 msgid "Border Width"
 msgstr "Border Width"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr "Build <0>{buildSha}</0> · <1>{buildTime}</1>"
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "Build your own resume"
