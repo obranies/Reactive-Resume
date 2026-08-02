@@ -688,6 +688,12 @@ msgstr "बोर्डर (किनारा) घुमाउरोपन (Rad
 msgid "Border Width"
 msgstr "बोर्डर (किनारा) चौडाइ"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "आफ्नो बायोडाटा बनाउनुहोस्"

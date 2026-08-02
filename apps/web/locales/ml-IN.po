@@ -688,6 +688,12 @@ msgstr "ബോർഡർ വൃത്താകൃതി (Radius)"
 msgid "Border Width"
 msgstr "ബോർഡർ വീതി"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "നിങ്ങളുടെ സ്വന്തം റെസ്യൂമെ നിർമ്മിക്കൂ"

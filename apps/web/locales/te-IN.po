@@ -688,6 +688,12 @@ msgstr "సరిహద్దు వ్యాసార్థం"
 msgid "Border Width"
 msgstr "సరిహద్దు వెడల్పు"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "మీ స్వంత రెజ్యూమెను రూపొందించుకోండి"

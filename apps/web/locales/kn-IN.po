@@ -688,6 +688,12 @@ msgstr "ಗಡಿ ತ್ರಿಜ್ಯ"
 msgid "Border Width"
 msgstr "ಗಡಿಯ ಅಗಲ"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "ನಿಮ್ಮ ಸ್ವಂತ ರೆಸ್ಯೂಮ್ ಅನ್ನು ರಚಿಸಿ"

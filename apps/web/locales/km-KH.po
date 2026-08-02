@@ -688,6 +688,12 @@ msgstr "រ៉េឌីយ៉ូស​គែម"
 msgid "Border Width"
 msgstr "ទទឹង​គែម"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "បង្កើតប្រវត្តិរូបសង្ខេបផ្ទាល់ខ្លួនរបស់អ្នក"
