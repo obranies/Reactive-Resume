@@ -73,6 +73,7 @@ const slotSelectors = {
 	companyName: ' field[name="company"]',
 	itemPosition: ' item:not([role~="nested-role"]) field[name="position"]',
 	roleTitle: ' item[role~="nested-role"] field[name="position"]',
+	roleDate: ' item[role~="nested-role"] field[name="period"]',
 } as const satisfies Record<StyleSlot, string>;
 
 const selectorForSlot = (base: string, slot: StyleSlot): string => {
