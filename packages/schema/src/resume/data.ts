@@ -544,6 +544,7 @@ const styleSlotSchema = z.enum([
 	"companyName",
 	"itemPosition",
 	"roleTitle",
+	"roleDate",
 ]);
 
 export type StyleSlot = z.infer<typeof styleSlotSchema>;
