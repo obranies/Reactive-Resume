@@ -122,6 +122,7 @@ type ItemTitleProps = {
 	website: ItemWebsite;
 	field: string;
 	bold?: boolean;
+	style?: StyleInput;
 };
 
 type ItemWebsiteLinkProps = {
@@ -757,15 +758,16 @@ const SectionItemHeader = ({ children }: SectionItemHeaderProps) => {
 	);
 };
 
-const ItemTitle = ({ children, website, field, bold = true }: ItemTitleProps) => {
+const ItemTitle = ({ children, website, field, bold = true, style }: ItemTitleProps) => {
 	const inlineWebsiteUrl = getInlineItemWebsiteUrl(website);
-	const style = use(ItemHeaderRowNowrapContext) ? nowrapItemTitleStyle : wrappingItemTitleStyle;
+	const nowrapStyle = use(ItemHeaderRowNowrapContext) ? nowrapItemTitleStyle : wrappingItemTitleStyle;
+	const resolvedStyle = composeStyles(nowrapStyle, style);
 	const title = bold ? (
-		<Bold style={style} semanticField={field}>
+		<Bold style={resolvedStyle} semanticField={field}>
 			{children}
 		</Bold>
 	) : (
-		<Text style={style} semanticField={field}>
+		<Text style={resolvedStyle} semanticField={field}>
 			{children}
 		</Text>
 	);
@@ -773,7 +775,7 @@ const ItemTitle = ({ children, website, field, bold = true }: ItemTitleProps) =>
 	if (!inlineWebsiteUrl) return title;
 
 	return (
-		<Link style={style} semanticRole="inline-website" src={inlineWebsiteUrl}>
+		<Link style={resolvedStyle} semanticRole="inline-website" src={inlineWebsiteUrl}>
 			{title}
 		</Link>
 	);
@@ -869,6 +871,7 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 	const headerExists = useSemanticNodeExists(headerNodeKey);
 	const descriptionExists = useSemanticNodeExists(descriptionNodeKey);
 	const websiteExists = useSemanticNodeExists(websiteNodeKey);
+	const roleTitleRuleStyle = useSectionStyleRule("roleTitle");
 	const roleEntries = item.roles.map((role) => ({
 		nodeKey: itemNodeKey ? semanticNodeKeys.item(itemNodeKey, role.id) : role.id,
 		value: (
@@ -888,7 +891,7 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 				<Div bindCurrentNode {...getNoBreakProps(role.keepTogether)}>
 					<SectionItemHeader>
 						<View style={composeStyles(splitRowStyle)}>
-							<Text semanticField="position" style={composeStyles(roleTitleStyle)}>
+							<Text semanticField="position" style={composeStyles(roleTitleRuleStyle, roleTitleStyle)}>
 								{role.position}
 							</Text>
 							<Text semanticField="period" style={composeStyles(alignEndStyle)}>
@@ -942,6 +945,8 @@ const ExperienceSection = ({ sectionId = "experience", sectionData }: ItemSectio
 	const splitRowStyle = useSectionSplitRowStyle();
 	const alignEndStyle = useTemplateStyle("alignEnd");
 	const inlineItemHeader = useTemplateFeature("inlineItemHeader");
+	const companyNameRuleStyle = useSectionStyleRule("companyName");
+	const itemPositionRuleStyle = useSectionStyleRule("itemPosition");
 
 	if (items.length === 0) return null;
 
@@ -970,7 +975,7 @@ const ExperienceSection = ({ sectionId = "experience", sectionData }: ItemSectio
 								) : null
 							}
 							middle={
-								<ItemTitle field="company" website={item.website}>
+								<ItemTitle field="company" website={item.website} style={companyNameRuleStyle}>
 									{item.company}
 								</ItemTitle>
 							}
@@ -985,7 +990,7 @@ const ExperienceSection = ({ sectionId = "experience", sectionData }: ItemSectio
 					const renderSplitHeader = () => (
 						<>
 							<View style={composeStyles(splitRowStyle)}>
-								<ItemTitle field="company" website={item.website}>
+								<ItemTitle field="company" website={item.website} style={companyNameRuleStyle}>
 									{item.company}
 								</ItemTitle>
 								{hasSplitRowText(headerLocation) && (
@@ -1000,7 +1005,11 @@ const ExperienceSection = ({ sectionId = "experience", sectionData }: ItemSectio
 
 							{(hasPosition || hasSplitRowText(headerPeriod)) && (
 								<View style={hasPosition ? splitRowStyle : getTrailingOnlySplitRowStyle(splitRowStyle)}>
-									{hasPosition && <Text semanticField="position">{item.position}</Text>}
+									{hasPosition && (
+										<Text semanticField="position" style={composeStyles(itemPositionRuleStyle)}>
+											{item.position}
+										</Text>
+									)}
 									{hasSplitRowText(headerPeriod) && (
 										<SemanticTextRuns
 											host="experience-period"

@@ -541,6 +541,9 @@ const styleSlotSchema = z.enum([
 	"richLink",
 	"richBold",
 	"richMark",
+	"companyName",
+	"itemPosition",
+	"roleTitle",
 ]);
 
 export type StyleSlot = z.infer<typeof styleSlotSchema>;
