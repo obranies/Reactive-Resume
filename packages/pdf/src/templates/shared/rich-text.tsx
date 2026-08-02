@@ -306,9 +306,28 @@ export const RichText = ({ children, semanticField }: RichTextProps) => {
 
 					// Yoga ignores `flexDirection`/`direction` on rows inside react-pdf-html's <ul>
 					// (works fine for split-row/contact-list). Swap DOM order to position the marker.
+					//
+					// Marker and content are independent flex children of this row, so react-pdf's own
+					// splitNodes (not our SectionItem/role noBreak machinery, which never reaches this
+					// tree) evaluates them separately when the row straddles a page break: the short
+					// marker fits and stays, the taller multi-line content doesn't and moves whole to the
+					// next page, leaving a bullet glyph with no text behind it. wrap={false} makes the
+					// row atomic, so an overflowing row moves to the next page as a unit instead.
+					// minPresenceAhead covers the other half — a row that fits as-is but leaves less than
+					// one line of room below it reads as a widow, so require at least one line of headroom
+					// or push the whole row down.
+					//
+					// wrap={false} is placed after the resolvedPdfFlowProps spread so it wins over any
+					// stylesheet-resolved value on this node (Div has the opposite order elsewhere in this
+					// package, where the resolved value wins over an explicit prop — see the precedence
+					// note on SectionItem in sections.tsx). No stylesheet rule maps to list-item nodes
+					// today, so this is currently unobservable, but the two components must not silently
+					// diverge if one gains such a rule later.
 					return (
 						<View
 							{...resolvedPdfFlowProps(itemResolved)}
+							wrap={false}
+							minPresenceAhead={itemResolved.minPresenceAhead ?? bodyLineHeight ?? metadata.typography.body.lineHeight}
 							style={composeStyles(
 								richListItemRowStyle,
 								richListItemRowRuleStyle,
