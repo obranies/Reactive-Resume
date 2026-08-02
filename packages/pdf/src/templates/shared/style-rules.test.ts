@@ -201,4 +201,28 @@ describe("resolveStyleRuleSlot", () => {
 		expect(resolveStyleRuleSlot(data, { ...context, slot: "roleTitle" })).toEqual({ color: "#16a34a" });
 		expect(resolveStyleRuleSlot(data, { ...context, slot: "text" })).toEqual({});
 	});
+
+	it("resolves roleDate independently of roleTitle so the role title/date pair can share styling", () => {
+		const data = createResumeData([
+			{
+				id: "experience-role-title",
+				label: "Experience Role Title",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { roleTitle: { color: "rgba(41, 128, 185, 1)", fontSize: 10 } },
+			},
+			{
+				id: "experience-role-date",
+				label: "Experience Role Date",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { roleDate: { color: "rgba(41, 128, 185, 1)", fontSize: 10 } },
+			},
+		]);
+		const context = { sectionId: "experience", sectionType: "experience" as const };
+
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "roleTitle" })).toEqual({ color: "#2980b9", fontSize: 10 });
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "roleDate" })).toEqual({ color: "#2980b9", fontSize: 10 });
+		expect(resolveStyleRuleSlot(data, { ...context, slot: "text" })).toEqual({});
+	});
 });

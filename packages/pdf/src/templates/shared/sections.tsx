@@ -851,6 +851,7 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 	const descriptionExists = useSemanticNodeExists(descriptionNodeKey);
 	const websiteExists = useSemanticNodeExists(websiteNodeKey);
 	const roleTitleRuleStyle = useSectionStyleRule("roleTitle");
+	const roleDateRuleStyle = useSectionStyleRule("roleDate");
 	const roleEntries = item.roles.map((role) => ({
 		nodeKey: itemNodeKey ? semanticNodeKeys.item(itemNodeKey, role.id) : role.id,
 		value: (
@@ -873,7 +874,7 @@ const ExperienceItemContent = ({ item, header, splitRowStyle, alignEndStyle }: E
 							<Text semanticField="position" style={composeStyles(roleTitleRuleStyle, roleTitleStyle)}>
 								{role.position}
 							</Text>
-							<Text semanticField="period" style={composeStyles(alignEndStyle)}>
+							<Text semanticField="period" style={composeStyles(roleDateRuleStyle, alignEndStyle)}>
 								{role.period}
 							</Text>
 						</View>
