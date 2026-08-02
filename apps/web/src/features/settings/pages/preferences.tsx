@@ -46,7 +46,10 @@ export function PreferencesSettingsPage({ buildSha, buildTime }: Props) {
 			</div>
 
 			<p className="text-muted-foreground/80 text-xs">
-				<Trans comment="Build info shown in settings; buildSha and buildTime are runtime values, not translatable">
+				<Trans
+					id="settings.preferences.buildInfo"
+					comment="Build info shown in settings; buildSha and buildTime are runtime values, not translatable"
+				>
 					Build <bdi>{buildSha}</bdi> · <bdi>{buildTime}</bdi>
 				</Trans>
 			</p>
