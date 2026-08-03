@@ -28,6 +28,10 @@ const styleSlots = [
 	"richLink",
 	"richBold",
 	"richMark",
+	"companyName",
+	"itemPosition",
+	"roleTitle",
+	"roleDate",
 ] as const satisfies readonly StyleSlot[];
 
 const lengthProperties = new Set<keyof StyleIntent>([
@@ -64,17 +68,39 @@ const slotSelectors = {
 	richLink: " rich-text link",
 	richBold: " rich-text strong",
 	richMark: " rich-text mark",
-	// Not in `styleSlots` yet, so `activeSlotChunks`/`disabledRuleChunk` never look these up at
-	// runtime: legacy CSS export still resolves company/position through the "text" selector
-	// above. Entries exist only to satisfy the exhaustive Record<StyleSlot, string> type; wiring
-	// them into the legacy stylesheet needs its own pass to confirm the nested-role selector
-	// convention (see the `item[role~="nested-role"]` case in textWeightSelector) rather than
-	// guessing it here.
+	// Experience item/role fields own a dedicated slot each. These paths deliberately lean on the
+	// field's own role rather than on where it sits, because the structure between `item` and the
+	// field is template-specific: azurill wraps it in `template-part[timeline-content]`, meowth's
+	// inline header adds a `template-part`, and period sits under `combined-text` (see
+	// SemanticTextRuns). Any fixed `>` chain silently matches nothing on some template.
+	//
+	// The roles carry exactly the distinction the slots draw (see STANDARD_FIELD_REGISTRY): a
+	// company is its item's primary text, the item-level position its secondary text — and inside
+	// a role that inverts, the role's position being *its* primary text. Only `period` is
+	// secondary text on both levels, so roleDate is the one that still needs a structural
+	// qualifier; scoping it under the role item is safe in that direction, since a role item only
+	// ever contains its own fields.
+	//
+	// These paths double as the exclusion arguments the "text" catch-all steps back for — see
+	// FIELD_SLOTS/claimedFieldExclusions.
 	companyName: ' field[name="company"]',
-	itemPosition: ' item:not([role~="nested-role"]) field[name="position"]',
-	roleTitle: ' item[role~="nested-role"] field[name="position"]',
+	// `:not(combined-text field)` mirrors a legacy limitation rather than a style choice: templates
+	// with an inline item header (meowth) route position+location through SemanticTextRuns, which
+	// renders the runs as plain text without the itemPosition style, so legacy leaves those
+	// positions on the catch-all. Claiming them here would style something legacy does not.
+	itemPosition: ' field[name="position"][role~="secondary-text"]:not(combined-text field)',
+	roleTitle: ' field[name="position"][role~="primary-text"]',
 	roleDate: ' item[role~="nested-role"] field[name="period"]',
 } as const satisfies Record<StyleSlot, string>;
+
+/**
+ * Slots that own one specific field and therefore take precedence over the generic "text"
+ * catch-all for exactly that field. The catch-all cannot simply outrank them: its four
+ * `:not([name=…])` clauses already give it specificity (0,5,2)/(0,6,2), which no truthful
+ * qualifier on a single field selector reaches. So instead of a specificity race, the catch-all
+ * names the fields it hands over — see claimedFieldExclusions.
+ */
+const FIELD_SLOTS = ["companyName", "itemPosition", "roleTitle", "roleDate"] as const satisfies readonly StyleSlot[];
 
 const selectorForSlot = (base: string, slot: StyleSlot): string => {
 	if (slot === "link") {
@@ -136,11 +162,61 @@ const appliesToAwards = (data: ResumeData, rule: StyleRule): boolean => {
 	return getSectionStyleRuleContext(data, rule.target.sectionId).sectionType === "awards";
 };
 
-const textWeightSelector = (data: ResumeData, rule: StyleRule, base: string): string => {
+const ruleSectionType = (data: ResumeData, rule: StyleRule): string | undefined => {
+	if (rule.target.scope === "sectionType") return rule.target.sectionType;
+	if (rule.target.scope === "sectionId") return getSectionStyleRuleContext(data, rule.target.sectionId).sectionType;
+	return undefined;
+};
+
+/**
+ * Whether two rules can address the same section at all. A global rule always can; two scoped
+ * rules only when they land on the same section. Without this the catch-all would collect
+ * exclusions for sections it never touches — harmless for matching (each exclusion carries its
+ * own section base) but not for the cascade, because `:not(…)` inherits its argument's
+ * specificity and would silently outrank unrelated rules on the same fields.
+ */
+const rulesCanOverlap = (data: ResumeData, left: StyleRule, right: StyleRule): boolean => {
+	if (left.target.scope === "global" || right.target.scope === "global") return true;
+	if (left.target.scope === "sectionId" && right.target.scope === "sectionId") {
+		return left.target.sectionId === right.target.sectionId;
+	}
+	return ruleSectionType(data, left) === ruleSectionType(data, right);
+};
+
+/**
+ * The `:not(…)` clauses the generic "text" catch-all needs so it stops competing with the
+ * field-owning slots. One clause per overlapping enabled rule × claimed slot, and each clause
+ * carries the claiming rule's own base selector, so the hand-over is scoped exactly like the rule
+ * that claims it: a section-scoped companyName rule only pulls company out of the catch-all inside
+ * that section, and a global "text" rule keeps company everywhere else. That scoping is what makes
+ * this safe — an experience-scoped claim never silently strips education/volunteer/references
+ * fields, so the catch-all stays untouched for sections without such a rule.
+ */
+const claimedFieldExclusions = (data: ResumeData, textRule: StyleRule, rules: readonly StyleRule[]): string =>
+	rules
+		.filter((rule) => rule.enabled && rulesCanOverlap(data, textRule, rule))
+		.flatMap((rule) =>
+			FIELD_SLOTS.filter(
+				(slot) =>
+					rule.slots[slot] && Object.keys(declarationsFromStyle(resolvedRuleStyle(data, rule, slot))).length > 0,
+			).map((slot) => `:not(${ruleBaseSelector(rule)}${slotSelectors[slot]})`),
+		)
+		.join("");
+
+const textWeightSelector = (
+	data: ResumeData,
+	rule: StyleRule,
+	base: string,
+	rules: readonly StyleRule[],
+	exclusions: string,
+): string => {
 	const selectors = [
-		`${base} field:not([name="content"]):not([name="description"]):not([name="recipient"]):not([name="keywords"]):not([role~="primary-text"])`,
-		`${base} item[role~="nested-role"] > item-header > field[name="position"]`,
+		`${base} field:not([name="content"]):not([name="description"]):not([name="recipient"]):not([name="keywords"]):not([role~="primary-text"])${exclusions}`,
 	];
+	// The role-position host only needs the template bold weight while no roleTitle rule owns it.
+	if (!rules.some((other) => other.enabled && other.slots.roleTitle)) {
+		selectors.push(`${base} item[role~="nested-role"] > item-header > field[name="position"]`);
+	}
 	if (appliesToAwards(data, rule)) selectors.push(`${base} field[name="title"]`);
 	return selectors.join(",\n");
 };
@@ -173,9 +249,16 @@ const levelDecorationDeclarations = (
 	return { width: fontSize, height: fontSize };
 };
 
-const activeSlotChunks = (data: ResumeData, rule: StyleRule, slot: StyleSlot): string[] => {
+const activeSlotChunks = (
+	data: ResumeData,
+	rule: StyleRule,
+	slot: StyleSlot,
+	rules: readonly StyleRule[],
+): string[] => {
 	const base = ruleBaseSelector(rule);
-	const selector = selectorForSlot(base, slot);
+	// Only the generic catch-all hands fields over; every other slot already names its own target.
+	const exclusions = slot === "text" ? claimedFieldExclusions(data, rule, rules) : "";
+	const selector = `${selectorForSlot(base, slot)}${exclusions}`;
 	const declarations = declarationsFromStyle(resolvedRuleStyle(data, rule, slot));
 	const combinedTextDeclarations = slot === "text" ? { ...declarations } : undefined;
 	const chunks: string[] = [];
@@ -191,7 +274,9 @@ const activeSlotChunks = (data: ResumeData, rule: StyleRule, slot: StyleSlot): s
 		delete declarations.fontWeight;
 		if (Object.keys(declarations).length > 0)
 			chunks.push(serializeBlock(selector, declarations, rule.label || rule.id));
-		chunks.push(serializeBlock(textWeightSelector(data, rule, base), { fontWeight }, rule.label || rule.id));
+		chunks.push(
+			serializeBlock(textWeightSelector(data, rule, base, rules, exclusions), { fontWeight }, rule.label || rule.id),
+		);
 		comments.push(
 			"Legacy Bold hosts keep the template bold weight; award titles remain the explicit unbold exception.",
 		);
@@ -265,7 +350,9 @@ export function convertLegacyStyleRules(data: ResumeData): LegacyStyleConversion
 		.map(({ rule }) => rule);
 	const chunks = orderedRules.flatMap((rule) => {
 		if (!rule.enabled) return [disabledRuleChunk(sanitizedData, rule)];
-		return styleSlots.flatMap((slot) => (rule.slots[slot] ? activeSlotChunks(sanitizedData, rule, slot) : []));
+		return styleSlots.flatMap((slot) =>
+			rule.slots[slot] ? activeSlotChunks(sanitizedData, rule, slot, sanitizedRules) : [],
+		);
 	});
 	const text = `@version 1;\n${chunks.length > 0 ? `\n${chunks.join("\n\n")}\n` : ""}`;
 
