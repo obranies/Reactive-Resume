@@ -115,4 +115,52 @@ describe("convertLegacyStyleRules", () => {
 		const result = convertLegacyStyleRules(dataWithRules("all-templates-smoke"));
 		expect(compileStylesheet(result.source).diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
 	});
+
+	it("hands claimed experience fields over from the text catch-all instead of outranking it", () => {
+		const fieldSlotRule = (id: string, slot: string, target: StyleRule["target"]): StyleRule =>
+			({ id, label: id, enabled: true, target, slots: { [slot]: { fontSize: 12 } } }) as StyleRule;
+		const experience = { scope: "sectionId", sectionId: "experience" } as const;
+		const data = structuredClone(defaultResumeData);
+		data.metadata.styleRules = [
+			fieldSlotRule("text", "text", experience),
+			fieldSlotRule("company", "companyName", experience),
+			fieldSlotRule("role-date", "roleDate", experience),
+			fieldSlotRule("education-text", "text", { scope: "sectionId", sectionId: "education" }),
+		];
+		const source = convertLegacyStyleRules(data).source.text;
+		const catchAll = source.split("\n").filter((line) => line.startsWith('section[id="experience"] field:not('));
+		const education = source.split("\n").filter((line) => line.startsWith('section[id="education"] field:not('));
+
+		// The claimed fields get their own rule, and the catch-all names exactly those hand-overs.
+		expect(source).toContain('section[id="experience"] field[name="company"] {');
+		expect(source).toContain('section[id="experience"] item[role~="nested-role"] field[name="period"] {');
+		expect(catchAll.every((line) => line.includes(':not(section[id="experience"] field[name="company"])'))).toBe(true);
+		// A section without such a rule keeps the catch-all it always had.
+		expect(education).not.toHaveLength(0);
+		expect(education.some((line) => line.includes(":not(section["))).toBe(false);
+		expect(compileStylesheet(convertLegacyStyleRules(data).source).program).not.toBeNull();
+	});
+
+	it("scopes the hand-over to the claiming rule when the catch-all is broader", () => {
+		const data = structuredClone(defaultResumeData);
+		data.metadata.styleRules = [
+			{ id: "text", label: "text", enabled: true, target: { scope: "global" }, slots: { text: { fontSize: 12 } } },
+			{
+				id: "company",
+				label: "company",
+				enabled: true,
+				target: { scope: "sectionId", sectionId: "experience" },
+				slots: { companyName: { fontSize: 14 } },
+			},
+		] as StyleRule[];
+		const globalCatchAll = convertLegacyStyleRules(data)
+			.source.text.split("\n")
+			.filter((line) => line.startsWith("section field:not("));
+
+		// A global catch-all still steps back, but only inside the section that claims the field.
+		expect(globalCatchAll).not.toHaveLength(0);
+		expect(globalCatchAll.every((line) => line.includes(':not(section[id="experience"] field[name="company"])'))).toBe(
+			true,
+		);
+	});
 });
