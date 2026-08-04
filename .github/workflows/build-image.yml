@@ -1,12 +1,13 @@
-name: Build and Push Docker Image
+name: Build, Push and Deploy Docker Image
 
 on:
   push:
     branches: [custom]
 
 jobs:
-  build-and-push:
+  build-push-and-deploy:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
@@ -43,3 +44,20 @@ jobs:
             APP_BUILD_TIME=${{ steps.build-meta.outputs.time }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Deploy Reactive Resume
+        timeout-minutes: 7
+        env:
+          PORTAINER_DEPLOY_TOKEN: ${{ secrets.PORTAINER_DEPLOY_TOKEN }}
+        run: |
+          curl \
+            --fail-with-body \
+            --silent \
+            --show-error \
+            --connect-timeout 15 \
+            --max-time 360 \
+            -X POST \
+            -H "Authorization: Bearer ${PORTAINER_DEPLOY_TOKEN}" \
+            https://portainer-api.branies.net/deploy/reactive-resume
+
+          echo
