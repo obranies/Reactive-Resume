@@ -46,18 +46,72 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Deploy Reactive Resume
-        timeout-minutes: 7
+        timeout-minutes: 10
         env:
           PORTAINER_DEPLOY_TOKEN: ${{ secrets.PORTAINER_DEPLOY_TOKEN }}
         run: |
-          curl \
-            --fail-with-body \
-            --silent \
-            --show-error \
-            --connect-timeout 15 \
-            --max-time 360 \
-            -X POST \
-            -H "Authorization: Bearer ${PORTAINER_DEPLOY_TOKEN}" \
-            https://portainer-api.branies.net/deploy/reactive-resume
+          START_RESPONSE="$(
+            curl \
+              --fail-with-body \
+              --silent \
+              --show-error \
+              --connect-timeout 15 \
+              --max-time 30 \
+              -X POST \
+              -H "Authorization: Bearer ${PORTAINER_DEPLOY_TOKEN}" \
+              https://portainer-api.branies.net/deploy/reactive-resume
+          )"
 
-          echo
+          echo "${START_RESPONSE}" | jq .
+
+          JOB_ID="$(
+            jq -er '.jobId' <<< "${START_RESPONSE}"
+          )"
+
+          for ATTEMPT in $(seq 1 90); do
+            sleep 5
+
+            STATUS_RESPONSE="$(
+              curl \
+                --fail-with-body \
+                --silent \
+                --show-error \
+                --connect-timeout 15 \
+                --max-time 30 \
+                --retry 3 \
+                --retry-delay 2 \
+                --retry-all-errors \
+                -H "Authorization: Bearer ${PORTAINER_DEPLOY_TOKEN}" \
+                "https://portainer-api.branies.net/deploy/reactive-resume/status?jobId=${JOB_ID}"
+            )"
+
+            DEPLOY_STATUS="$(
+              jq -er '.status' <<< "${STATUS_RESPONSE}"
+            )"
+
+            echo "Deployment status: ${DEPLOY_STATUS}"
+
+            case "${DEPLOY_STATUS}" in
+              succeeded)
+                echo "${STATUS_RESPONSE}" | jq .
+                exit 0
+                ;;
+
+              failed)
+                echo "${STATUS_RESPONSE}" | jq .
+                exit 1
+                ;;
+
+              running)
+                ;;
+
+              *)
+                echo "Unexpected deployment status: ${DEPLOY_STATUS}"
+                echo "${STATUS_RESPONSE}" | jq .
+                exit 1
+                ;;
+            esac
+          done
+
+          echo "Deployment did not finish within 450 seconds"
+          exit 1
