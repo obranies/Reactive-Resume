@@ -41,6 +41,9 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
 
 FROM node:${NODE_VERSION}-slim AS runtime
 
+ARG APP_BUILD_SHA=unknown
+ARG APP_BUILD_TIME=unknown
+
 LABEL maintainer="amruthpillai"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.title="Reactive Resume"
@@ -52,7 +55,9 @@ LABEL org.opencontainers.image.source="https://github.com/reactive-resume/reacti
 
 ENV NODE_ENV="production" \
     PORT=3000 \
-    LOCAL_STORAGE_PATH=/app/data
+    LOCAL_STORAGE_PATH=/app/data \
+    APP_BUILD_SHA=${APP_BUILD_SHA} \
+    APP_BUILD_TIME=${APP_BUILD_TIME}
 
 WORKDIR /app
 

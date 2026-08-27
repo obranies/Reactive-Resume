@@ -6,7 +6,12 @@ import { Label } from "@reactive-resume/ui/components/label";
 import { LocaleCombobox } from "@/features/locale/combobox";
 import { ThemeCombobox } from "@/features/theme/combobox";
 
-export function PreferencesSettingsPage() {
+type Props = {
+	buildSha: string;
+	buildTime: string;
+};
+
+export function PreferencesSettingsPage({ buildSha, buildTime }: Props) {
 	return (
 		<m.div
 			initial={{ y: -20 }}
@@ -39,6 +44,12 @@ export function PreferencesSettingsPage() {
 					}
 				/>
 			</div>
+
+			<p className="text-muted-foreground/80 text-xs">
+				<Trans comment="Build info shown in settings; buildSha and buildTime are runtime values, not translatable">
+					Build <bdi>{buildSha}</bdi> · <bdi>{buildTime}</bdi>
+				</Trans>
+			</p>
 		</m.div>
 	);
 }

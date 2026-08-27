@@ -6,6 +6,8 @@ export type FeatureFlags = {
 	disableSignups: boolean;
 	disableEmailAuth: boolean;
 	smtpEnabled: boolean;
+	buildSha: string;
+	buildTime: string;
 };
 
 // Mirrors isSmtpEnabled() in packages/email/src/transport.ts (kept local to avoid an api -> email dependency).
@@ -28,6 +30,8 @@ export const flagsRouter = {
 				disableSignups: z.boolean().describe("Whether new user signups are disabled on this instance."),
 				disableEmailAuth: z.boolean().describe("Whether email-based authentication is disabled on this instance."),
 				smtpEnabled: z.boolean().describe("Whether outbound email (SMTP) is configured on this instance."),
+				buildSha: z.string().describe("The short git commit SHA this instance was built from."),
+				buildTime: z.string().describe("The ISO 8601 timestamp this instance was built at."),
 			}),
 		)
 		.handler(
@@ -35,6 +39,8 @@ export const flagsRouter = {
 				disableSignups: env.FLAG_DISABLE_SIGNUPS,
 				disableEmailAuth: env.FLAG_DISABLE_EMAIL_AUTH,
 				smtpEnabled: isSmtpEnabled(),
+				buildSha: env.APP_BUILD_SHA,
+				buildTime: env.APP_BUILD_TIME,
 			}),
 		),
 };
