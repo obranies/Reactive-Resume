@@ -211,6 +211,28 @@ describe("web app fallback classification", () => {
 		expect(unversionedHeaders.get("Cache-Control")).toBeNull();
 	});
 
+	it("caches every content-hashed build asset immutably", async () => {
+		const headers = new Headers();
+
+		await staticOptions?.onFound?.("", {
+			req: { path: "/assets/index-a1b2c3d4.js" },
+			header: (name, value) => headers.set(name, value),
+		});
+
+		expect(headers.get("Cache-Control")).toBe("public, max-age=31536000, immutable");
+	});
+
+	it("does not cache unhashed static files under the dist root", async () => {
+		const headers = new Headers();
+
+		await staticOptions?.onFound?.("", {
+			req: { path: "/favicon.ico" },
+			header: (name, value) => headers.set(name, value),
+		});
+
+		expect(headers.get("Cache-Control")).toBeNull();
+	});
+
 	it.each(["/", "/alice/resume"])("sets framing and report-only CSP security headers on %s", async (pathname) => {
 		const response = await handleWebApp(new Request(`https://example.com${pathname}`));
 
@@ -219,6 +241,15 @@ describe("web app fallback classification", () => {
 		expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
 		expect(response.headers.get("Content-Security-Policy-Report-Only")).toContain("frame-ancestors 'none'");
 	});
+
+	it.each(["/", "/dashboard", "/alice/resume"])(
+		"never lets the HTML shell be served from a stale cache on %s",
+		async (pathname) => {
+			const response = await handleWebApp(new Request(`https://example.com${pathname}`));
+
+			expect(response.headers.get("Cache-Control")).toBe("no-cache");
+		},
+	);
 
 	it.each(["/auth/login", "/dashboard", "/builder/resume-1", "/agent", "/templates", "/templates/azurill.pdf"])(
 		"serves noindex shell for known app prefix %s",

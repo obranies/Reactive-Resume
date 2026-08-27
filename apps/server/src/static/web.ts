@@ -67,6 +67,14 @@ const BASE_SECURITY_HEADERS = {
 		"default-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
 };
 
+// The HTML shell references these by URL, not by hash, so it must be able to fetch a newer file
+// under the same name the moment a deploy replaces it.
+const HTML_CACHE_HEADERS = { "Cache-Control": "no-cache" };
+
+// Vite's build content-hashes every filename under /assets/, so a given URL never changes; unlike
+// the homepage media below, no version-suffix check is needed to know a cache hit is still correct.
+const IMMUTABLE_CACHE_PATTERNS = [/^\/assets\//, /^\/videos\/.*-v\d+\.(?:mp4|webp)$/];
+
 const ROOT_TITLE = "Reactive Resume — A free and open-source resume builder";
 // Keep under ~120 characters so Google's mobile SERP snippet is not truncated at 3 lines.
 const ROOT_DESCRIPTION =
@@ -251,7 +259,7 @@ async function createPublicResumeSeoMarkup(pathname: string, origin: string) {
 export const serveWebDistStatic = serveStatic({
 	root: staticRoot,
 	onFound: (_path, context) => {
-		if (/^\/videos\/.*-v\d+\.(?:mp4|webp)$/.test(context.req.path)) {
+		if (IMMUTABLE_CACHE_PATTERNS.some((pattern) => pattern.test(context.req.path))) {
 			context.header("Cache-Control", "public, max-age=31536000, immutable");
 		}
 	},
@@ -259,12 +267,13 @@ export const serveWebDistStatic = serveStatic({
 
 function getFallbackResponseHeaders(pathname: string) {
 	if (pathname === "/" || indexableAppPaths.has(pathname)) {
-		return { "Content-Type": "text/html; charset=UTF-8", ...BASE_SECURITY_HEADERS };
+		return { "Content-Type": "text/html; charset=UTF-8", ...HTML_CACHE_HEADERS, ...BASE_SECURITY_HEADERS };
 	}
 	if (isNoindexShellPath(pathname) || isPublicResumePath(pathname)) {
 		return {
 			"Content-Type": "text/html; charset=UTF-8",
 			"X-Robots-Tag": "noindex, follow",
+			...HTML_CACHE_HEADERS,
 			...BASE_SECURITY_HEADERS,
 		};
 	}
