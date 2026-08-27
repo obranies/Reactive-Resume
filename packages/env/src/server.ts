@@ -21,6 +21,10 @@ export const env = createEnv({
 		APP_URL: z.url({ protocol: /https?/ }),
 		SERVER_PORT: z.coerce.number().int().min(1).max(65535).default(3001),
 
+		// Build Info (injected via Docker build args; "unknown" outside the container image)
+		APP_BUILD_SHA: z.string().min(1).default("unknown"),
+		APP_BUILD_TIME: z.string().min(1).default("unknown"),
+
 		// Database
 		DATABASE_URL: z.url({ protocol: /postgres(ql)?/ }),
 

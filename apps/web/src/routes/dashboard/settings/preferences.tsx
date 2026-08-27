@@ -10,13 +10,15 @@ export const Route = createFileRoute("/dashboard/settings/preferences")({
 });
 
 function RouteComponent() {
+	const { flags } = Route.useRouteContext();
+
 	return (
 		<div className="space-y-4">
 			<DashboardHeader icon={GearSixIcon} title={t`Preferences`} />
 
 			<Separator />
 
-			<PreferencesSettingsPage />
+			<PreferencesSettingsPage buildSha={flags.buildSha} buildTime={flags.buildTime} />
 		</div>
 	);
 }
