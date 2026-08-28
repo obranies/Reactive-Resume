@@ -287,6 +287,13 @@ export const oauthClient = pg.pgTable(
 		requirePKCE: pg.boolean("require_pkce"),
 		referenceId: pg.text("reference_id"),
 		metadata: pg.jsonb("metadata"),
+		// Better Auth 1.7 added `applicationType`, `clientDiscoveryId`, and `clientCredentialsScopes`
+		// to the oauth-provider plugin's oauthClient model. All three are optional to the plugin,
+		// but the Drizzle adapter rejects a model whose columns it cannot find, so dynamic client
+		// registration throws until they exist. Existing rows keep NULL and stay valid.
+		applicationType: pg.text("application_type"),
+		clientDiscoveryId: pg.text("client_discovery_id"),
+		clientCredentialsScopes: pg.text("client_credentials_scopes").array(),
 	},
 	(t) => [pg.index().on(t.clientId)],
 );
