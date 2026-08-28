@@ -287,13 +287,22 @@ export const oauthClient = pg.pgTable(
 		requirePKCE: pg.boolean("require_pkce"),
 		referenceId: pg.text("reference_id"),
 		metadata: pg.jsonb("metadata"),
-		// Better Auth 1.7 added `applicationType`, `clientDiscoveryId`, and `clientCredentialsScopes`
-		// to the oauth-provider plugin's oauthClient model. All three are optional to the plugin,
-		// but the Drizzle adapter rejects a model whose columns it cannot find, so dynamic client
-		// registration throws until they exist. Existing rows keep NULL and stay valid.
+		// Better Auth 1.7 added `applicationType`, `clientDiscoveryId`, `clientCredentialsScopes`,
+		// `backchannelLogoutUri`, `backchannelLogoutSessionRequired`, `jwks`, `jwksUri`, and
+		// `dpopBoundAccessTokens` to the oauth-provider plugin's oauthClient model. All eight are
+		// optional to the plugin, but the Drizzle adapter rejects a model whose columns it cannot
+		// find, so dynamic client registration throws until they exist. Existing rows keep NULL (or
+		// the column default) and stay valid. The last five were verified against the plugin's own
+		// authoritative type declaration in @better-auth/oauth-provider@1.7.2, not just the upgrade
+		// guide, to close this gap in one pass.
 		applicationType: pg.text("application_type"),
 		clientDiscoveryId: pg.text("client_discovery_id"),
 		clientCredentialsScopes: pg.text("client_credentials_scopes").array(),
+		backchannelLogoutUri: pg.text("backchannel_logout_uri"),
+		backchannelLogoutSessionRequired: pg.boolean("backchannel_logout_session_required"),
+		jwks: pg.text("jwks"),
+		jwksUri: pg.text("jwks_uri"),
+		dpopBoundAccessTokens: pg.boolean("dpop_bound_access_tokens").default(false),
 	},
 	(t) => [pg.index().on(t.clientId)],
 );
