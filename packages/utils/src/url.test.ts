@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createUrl } from "./url";
+import { createUrl, isSafeRelativeRedirectPath } from "./url";
 
 describe("createUrl", () => {
 	it("returns empty url and label when no url provided", () => {
@@ -36,5 +36,44 @@ describe("createUrl", () => {
 			url: "not-a-url",
 			label: "Label",
 		});
+	});
+});
+
+describe("isSafeRelativeRedirectPath", () => {
+	it("accepts a single-leading-slash relative path", () => {
+		expect(isSafeRelativeRedirectPath("/dashboard")).toBe(true);
+		expect(isSafeRelativeRedirectPath("/api/auth/oauth?client_id=abc")).toBe(true);
+	});
+
+	it("rejects non-string values", () => {
+		expect(isSafeRelativeRedirectPath(undefined)).toBe(false);
+		expect(isSafeRelativeRedirectPath(null)).toBe(false);
+		expect(isSafeRelativeRedirectPath(42)).toBe(false);
+	});
+
+	it("rejects an empty string", () => {
+		expect(isSafeRelativeRedirectPath("")).toBe(false);
+	});
+
+	it("rejects a path with no leading slash", () => {
+		expect(isSafeRelativeRedirectPath("dashboard")).toBe(false);
+	});
+
+	it("rejects a protocol-relative path", () => {
+		expect(isSafeRelativeRedirectPath("//evil.com")).toBe(false);
+	});
+
+	it("rejects a backslash variant of a protocol-relative path", () => {
+		expect(isSafeRelativeRedirectPath("/\\evil.com")).toBe(false);
+	});
+
+	it("rejects a protocol-relative path with a spliced tab/newline", () => {
+		expect(isSafeRelativeRedirectPath("/\t/evil.com")).toBe(false);
+		expect(isSafeRelativeRedirectPath("/\n/evil.com")).toBe(false);
+	});
+
+	it("rejects an absolute url with a scheme", () => {
+		expect(isSafeRelativeRedirectPath("http://evil.com")).toBe(false);
+		expect(isSafeRelativeRedirectPath("https://evil.com")).toBe(false);
 	});
 });

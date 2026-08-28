@@ -2,7 +2,7 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { ArrowRightIcon, EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useRouter } from "@tanstack/react-router";
+import { getRouteApi, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { useToggle } from "usehooks-ts";
 import z from "zod";
@@ -10,10 +10,13 @@ import { Button } from "@reactive-resume/ui/components/button";
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@reactive-resume/ui/components/form";
 import { Input } from "@reactive-resume/ui/components/input";
 import { toast } from "@reactive-resume/ui/components/toast";
+import { isSafeRelativeRedirectPath } from "@reactive-resume/utils/url";
 import { authClient } from "@/libs/auth/client";
 import { orpc } from "@/libs/orpc/client";
 import { useAppForm } from "@/libs/tanstack-form";
 import { SocialAuth } from "../components/social-auth";
+
+const loginRoute = getRouteApi("/auth/login");
 
 const formSchema = z.object({
 	identifier: z.string().trim().toLowerCase(),
@@ -28,6 +31,7 @@ type Props = {
 export function LoginPage({ disableEmailAuth, disableSignups }: Props) {
 	const router = useRouter();
 	const navigate = useNavigate();
+	const { callbackURL } = loginRoute.useSearch();
 
 	const hasStartedConditionalPasskeyRef = useRef(false);
 	const [showPassword, toggleShowPassword] = useToggle(false);
@@ -69,12 +73,21 @@ export function LoginPage({ disableEmailAuth, disableSignups }: Props) {
 
 				if (requiresTwoFactor) {
 					toast.close(toastId);
-					void navigate({ to: "/auth/verify-2fa", replace: true });
+					// Forward callbackURL so the OAuth bridge flow can still resume once 2FA is verified.
+					void navigate({ to: "/auth/verify-2fa", replace: true, search: { callbackURL } });
 					return;
 				}
 
 				toast.close(toastId);
 				await router.invalidate();
+
+				// See apps/web/src/routes/auth/login.tsx: the OAuth bridge sends already-signed-in users
+				// through `callbackURL`, which points at a server endpoint, not a client route.
+				if (isSafeRelativeRedirectPath(callbackURL)) {
+					void navigate({ href: callbackURL, replace: true, reloadDocument: true });
+					return;
+				}
+
 				void navigate({ to: "/dashboard", replace: true });
 			} catch {
 				toast.add({ type: "error", description: t`Failed to sign in. Please try again.`, id: toastId });

@@ -1,14 +1,18 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { ArrowLeftIcon, CheckIcon } from "@phosphor-icons/react";
-import { Link, useNavigate, useRouter } from "@tanstack/react-router";
+import { getRouteApi, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import z from "zod";
 import { Button } from "@reactive-resume/ui/components/button";
 import { FormControl, FormItem, FormMessage } from "@reactive-resume/ui/components/form";
 import { Input } from "@reactive-resume/ui/components/input";
 import { toast } from "@reactive-resume/ui/components/toast";
+import { isSafeRelativeRedirectPath } from "@reactive-resume/utils/url";
 import { authClient } from "@/libs/auth/client";
 import { useAppForm } from "@/libs/tanstack-form";
+
+const verifyTwoFactorRoute = getRouteApi("/auth/verify-2fa");
+const verifyTwoFactorBackupRoute = getRouteApi("/auth/verify-2fa-backup");
 
 const totpSchema = z.object({
 	code: z.string().length(6, "Code must be 6 digits"),
@@ -20,9 +24,10 @@ const backupCodeSchema = z.object({
 
 type TwoFactorVerificationPageProps = {
 	backupCode?: boolean;
+	callbackURL?: string;
 };
 
-function TwoFactorVerificationPage({ backupCode = false }: TwoFactorVerificationPageProps) {
+function TwoFactorVerificationPage({ backupCode = false, callbackURL }: TwoFactorVerificationPageProps) {
 	const router = useRouter();
 	const navigate = useNavigate();
 
@@ -60,6 +65,13 @@ function TwoFactorVerificationPage({ backupCode = false }: TwoFactorVerification
 
 			toast.close(toastId);
 			await router.invalidate();
+
+			// Same OAuth bridge handoff as apps/web/src/features/auth/pages/login.tsx.
+			if (isSafeRelativeRedirectPath(callbackURL)) {
+				void navigate({ href: callbackURL, replace: true, reloadDocument: true });
+				return;
+			}
+
 			void navigate({ to: "/dashboard", replace: true });
 		},
 	});
@@ -158,9 +170,11 @@ function TwoFactorVerificationPage({ backupCode = false }: TwoFactorVerification
 }
 
 export function VerifyTwoFactorPage() {
-	return <TwoFactorVerificationPage />;
+	const { callbackURL } = verifyTwoFactorRoute.useSearch();
+	return <TwoFactorVerificationPage callbackURL={callbackURL} />;
 }
 
 export function VerifyTwoFactorBackupPage() {
-	return <TwoFactorVerificationPage backupCode />;
+	const { callbackURL } = verifyTwoFactorBackupRoute.useSearch();
+	return <TwoFactorVerificationPage backupCode callbackURL={callbackURL} />;
 }
