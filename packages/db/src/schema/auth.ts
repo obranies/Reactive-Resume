@@ -307,6 +307,57 @@ export const oauthClient = pg.pgTable(
 	(t) => [pg.index().on(t.clientId)],
 );
 
+// Better Auth 1.7's oauth-provider plugin added the resource-indicator model (`oauthResource` and
+// its join table `oauthClientResource`), which was entirely missing from this schema after the 1.7
+// upgrade. Identified by running `@better-auth/cli generate` against the live config (including the
+// oauth-provider plugin), not by reverse-engineering individual runtime errors.
+export const oauthResource = pg.pgTable("oauth_resource", {
+	id: pg
+		.text("id")
+		.notNull()
+		.primaryKey()
+		.$defaultFn(() => generateId()),
+	identifier: pg.text("identifier").notNull().unique(),
+	name: pg.text("name").notNull(),
+	accessTokenTtl: pg.integer("access_token_ttl"),
+	refreshTokenTtl: pg.integer("refresh_token_ttl"),
+	signingAlgorithm: pg.text("signing_algorithm"),
+	signingKeyId: pg.text("signing_key_id"),
+	allowedScopes: pg.text("allowed_scopes").array(),
+	customClaims: pg.jsonb("custom_claims"),
+	dpopBoundAccessTokensRequired: pg.boolean("dpop_bound_access_tokens_required").default(false),
+	disabled: pg.boolean("disabled").default(false),
+	createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
+	updatedAt: pg
+		.timestamp("updated_at", { withTimezone: true })
+		.defaultNow()
+		.$onUpdate(() => /* @__PURE__ */ new Date()),
+	policyVersion: pg.integer("policy_version").default(1),
+	metadata: pg.jsonb("metadata"),
+});
+
+export const oauthClientResource = pg.pgTable(
+	"oauth_client_resource",
+	{
+		id: pg
+			.text("id")
+			.notNull()
+			.primaryKey()
+			.$defaultFn(() => generateId()),
+		clientId: pg
+			.text("client_id")
+			.notNull()
+			.references(() => oauthClient.clientId, { onDelete: "cascade" }),
+		resourceId: pg
+			.text("resource_id")
+			.notNull()
+			.references(() => oauthResource.identifier, { onDelete: "cascade" }),
+		metadata: pg.jsonb("metadata"),
+		createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
+	},
+	(t) => [pg.index().on(t.clientId), pg.index().on(t.resourceId)],
+);
+
 export const oauthRefreshToken = pg.pgTable(
 	"oauth_refresh_token",
 	{
@@ -331,6 +382,18 @@ export const oauthRefreshToken = pg.pgTable(
 		revoked: pg.timestamp("revoked", { withTimezone: true }),
 		authTime: pg.timestamp("auth_time", { withTimezone: true }),
 		scopes: pg.text("scopes").array().notNull(),
+		// Verified against `@better-auth/cli generate` output for the live config: the oauth-provider
+		// plugin writes these on the very first authorization_code token exchange, not only on a
+		// later refresh, so they were missing from the same flow this schema already covers above.
+		// rotatedAt/rotationReplayResponse/rotationReplayExpiresAt are written only during refresh
+		// rotation. All optional.
+		authorizationCodeId: pg.text("authorization_code_id"),
+		resources: pg.text("resources").array(),
+		requestedUserInfoClaims: pg.text("requested_user_info_claims").array(),
+		confirmation: pg.jsonb("confirmation"),
+		rotatedAt: pg.timestamp("rotated_at", { withTimezone: true }),
+		rotationReplayResponse: pg.text("rotation_replay_response"),
+		rotationReplayExpiresAt: pg.timestamp("rotation_replay_expires_at", { withTimezone: true }),
 	},
 	(t) => [pg.index().on(t.token)],
 );
@@ -355,6 +418,14 @@ export const oauthAccessToken = pg.pgTable(
 		expiresAt: pg.timestamp("expires_at", { withTimezone: true }),
 		createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
 		scopes: pg.text("scopes").array().notNull(),
+		// Verified against `@better-auth/cli generate` output for the live config: the oauth-provider
+		// plugin also tracks the originating authorization code, RFC 8707 resource indicators, and
+		// per-token userinfo claim scoping, plus revocation and DPoP confirmation. All optional.
+		authorizationCodeId: pg.text("authorization_code_id"),
+		resources: pg.text("resources").array(),
+		requestedUserInfoClaims: pg.text("requested_user_info_claims").array(),
+		revoked: pg.timestamp("revoked", { withTimezone: true }),
+		confirmation: pg.jsonb("confirmation"),
 	},
 	(t) => [pg.index().on(t.token)],
 );
@@ -374,6 +445,10 @@ export const oauthConsent = pg.pgTable(
 		userId: pg.text("user_id").references(() => user.id, { onDelete: "cascade" }),
 		referenceId: pg.text("reference_id"),
 		scopes: pg.text("scopes").array().notNull(),
+		// Same RFC 8707 resource-indicator and userinfo-claim-scoping fields as oauthAccessToken,
+		// verified via `@better-auth/cli generate` against the live config. Both optional.
+		resources: pg.text("resources").array(),
+		requestedUserInfoClaims: pg.text("requested_user_info_claims").array(),
 		createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
 		updatedAt: pg
 			.timestamp("updated_at", { withTimezone: true })
@@ -382,3 +457,15 @@ export const oauthConsent = pg.pgTable(
 	},
 	(t) => [pg.index().on(t.userId, t.clientId)],
 );
+
+// Better Auth 1.7's oauth-provider plugin uses this table for private_key_jwt / JWT-bearer client
+// authentication (RFC 7523 / RFC 7521) replay protection. Entirely missing from this schema after
+// the 1.7 upgrade; identified via `@better-auth/cli generate` against the live config.
+export const oauthClientAssertion = pg.pgTable("oauth_client_assertion", {
+	id: pg
+		.text("id")
+		.notNull()
+		.primaryKey()
+		.$defaultFn(() => generateId()),
+	expiresAt: pg.timestamp("expires_at", { withTimezone: true }).notNull(),
+});
