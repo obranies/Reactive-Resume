@@ -31,6 +31,7 @@ async function renderRatings({ columns, count, mode = "semantic", configure }: F
 	data.sections.skills.items = Array.from({ length: count }, (_, index) => ({
 		id: `skill-${index}`,
 		hidden: false,
+		keepTogether: false,
 		icon: "",
 		iconColor: "",
 		name: `Skill ${index}`,
@@ -141,10 +142,11 @@ describe("skill rating alignment (#3343)", () => {
 				data.metadata.layout.pages = [{ fullWidth: true, main: ["languages"], sidebar: [] }];
 				data.sections.languages.columns = 2;
 				data.sections.languages.items = [
-					{ id: "english", hidden: false, language: "English", fluency: "Native", level: 5 },
+					{ id: "english", hidden: false, keepTogether: false, language: "English", fluency: "Native", level: 5 },
 					{
 						id: "german",
 						hidden: false,
+						keepTogether: false,
 						language: "German",
 						fluency:
 							"Professional working proficiency with deliberately long wrapping text across several lines in the language grid",

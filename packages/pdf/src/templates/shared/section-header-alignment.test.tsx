@@ -18,6 +18,7 @@ const fixture = (): ResumeData => {
 	data.sections.experience.items = ["Engineer", "", "  "].map((position, index) => ({
 		id: `experience-${index}`,
 		hidden: false,
+		keepTogether: false,
 		company: `Company ${index}`,
 		position,
 		location: "London",
@@ -29,6 +30,7 @@ const fixture = (): ResumeData => {
 	data.sections.education.items = ["Computing", "", "  ", ""].map((area, index) => ({
 		id: `education-${index}`,
 		hidden: false,
+		keepTogether: false,
 		school: `School ${index}`,
 		degree: index === 3 ? "" : "Degree",
 		area,

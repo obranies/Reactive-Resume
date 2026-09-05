@@ -33,7 +33,9 @@ export function createCoverLetterResumeData(
 			hidden: false,
 			keepTogether: false,
 			startOnNewPage: false,
-			items: [{ id: style.itemId, hidden: false, recipient: letter.recipient, content: letter.content }],
+			items: [
+				{ id: style.itemId, hidden: false, keepTogether: false, recipient: letter.recipient, content: letter.content },
+			],
 		},
 	];
 	return data;

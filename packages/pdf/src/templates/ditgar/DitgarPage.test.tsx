@@ -38,6 +38,7 @@ function fixture({ mode, columns, gapX, rtl, sidebar, longTitle, experience, css
 		const shared = {
 			id: `project-${index}`,
 			hidden: false,
+			keepTogether: false,
 			period: "",
 			description: `<p>Description${index} with enough words to wrap across the narrower column and preserve alignment.</p>`,
 			website: { url: `https://example.com/${index}`, label: `Website${index}`, inlineLink: false },

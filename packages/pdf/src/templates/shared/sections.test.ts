@@ -65,6 +65,7 @@ const createSkillItem = (overrides: Partial<SkillItem> = {}): SkillItem => ({
 	level: 0,
 	keywords: [],
 	hidden: false,
+	keepTogether: false,
 	proficiency: "",
 	icon: "",
 	iconColor: "",

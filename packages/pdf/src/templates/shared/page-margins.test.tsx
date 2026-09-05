@@ -38,6 +38,7 @@ const renderOverflow = async (
 		{
 			id: "experience",
 			hidden: false,
+			keepTogether: false,
 			company: "Company",
 			position: "Engineer",
 			location: "City",
