@@ -413,8 +413,16 @@ export const oauthResource = pg.pgTable("oauth_resource", {
 	customClaims: pg.jsonb("custom_claims"),
 	dpopBoundAccessTokensRequired: pg.boolean("dpop_bound_access_tokens_required").default(false),
 	disabled: pg.boolean("disabled").default(false),
-	createdAt: pg.timestamp("created_at", { withTimezone: true }),
-	updatedAt: pg.timestamp("updated_at", { withTimezone: true }),
+	// Deliberately deviates from upstream, which leaves these two columns without a DB default and
+	// relies on the oauth-provider plugin's seeding code to set them at insert/update time. We keep
+	// our own DB-side now() defaults (predates the upstream fix; migration 20260828124653) as a
+	// belt-and-suspenders backstop. Do not "fix" this to match upstream — `drizzle-kit generate`
+	// will otherwise propose a DROP DEFAULT migration that would remove intentional behavior.
+	createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
+	updatedAt: pg
+		.timestamp("updated_at", { withTimezone: true })
+		.defaultNow()
+		.$onUpdate(() => /* @__PURE__ */ new Date()),
 	policyVersion: pg.integer("policy_version").default(1),
 	metadata: pg.jsonb("metadata"),
 });
@@ -436,7 +444,8 @@ export const oauthClientResource = pg.pgTable(
 			.notNull()
 			.references(() => oauthResource.identifier, { onDelete: "cascade" }),
 		metadata: pg.jsonb("metadata"),
-		createdAt: pg.timestamp("created_at", { withTimezone: true }),
+		// Deliberately deviates from upstream — see the matching comment on oauthResource above.
+		createdAt: pg.timestamp("created_at", { withTimezone: true }).defaultNow(),
 	},
 	(t) => [pg.index().on(t.clientId), pg.index().on(t.resourceId), pg.uniqueIndex().on(t.clientId, t.resourceId)],
 );
