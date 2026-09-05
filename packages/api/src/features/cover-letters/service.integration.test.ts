@@ -118,7 +118,15 @@ describe.skipIf(!process.env.COVER_LETTER_TEST_DATABASE_URL)("cover-letter owned
 				hidden: true,
 				keepTogether: false,
 				startOnNewPage: false,
-				items: [{ id: "embedded-item", hidden: true, recipient: "Recipient", content: "<p>Original</p>" }],
+				items: [
+					{
+						id: "embedded-item",
+						hidden: true,
+						keepTogether: false,
+						recipient: "Recipient",
+						content: "<p>Original</p>",
+					},
+				],
 			},
 		];
 		await getPool().query("UPDATE resume SET data=$1 WHERE id='alice-resume'", [source]);

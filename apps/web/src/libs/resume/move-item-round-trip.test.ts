@@ -6,6 +6,7 @@ import { moveItem } from "./move-item";
 const company = (id: string) => ({
 	id,
 	hidden: false,
+	keepTogether: false,
 	company: `Company ${id}`,
 	position: `Position ${id}`,
 	location: "",

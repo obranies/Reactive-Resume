@@ -573,7 +573,7 @@ export function parseResumeText(text: string): ResumeData {
 				hidden: false,
 				keepTogether: false,
 				startOnNewPage: false,
-				items: [{ id: generateId(), hidden: false, content: toHtml(item.lines) }],
+				items: [{ id: generateId(), hidden: false, keepTogether: false, content: toHtml(item.lines) }],
 			});
 			order.push(id);
 			continue;

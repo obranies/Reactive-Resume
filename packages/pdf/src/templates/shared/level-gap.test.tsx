@@ -26,6 +26,7 @@ async function circlePositions(declaration = "", mode: "semantic" | "legacy" = "
 		{
 			id: "skill",
 			hidden: false,
+			keepTogether: false,
 			icon: "",
 			iconColor: "",
 			name: "Skill",

@@ -14,7 +14,17 @@ const renderLevel = async (level: number, css = "") => {
 	data.metadata.design.level = { type: "icon", icon: "star" };
 	data.metadata.stylesheet = { mode: "semantic", source: { languageVersion: 1, text: `@version 1; ${css}` } };
 	data.sections.skills.items = [
-		{ id: "skill", hidden: false, name: "Skill", proficiency: "Expert", level, keywords: [], icon: "", iconColor: "" },
+		{
+			id: "skill",
+			hidden: false,
+			keepTogether: false,
+			name: "Skill",
+			proficiency: "Expert",
+			level,
+			keywords: [],
+			icon: "",
+			iconColor: "",
+		},
 	];
 	const element = createElement(ResumeDocument, { data, template: "scizor" }) as unknown as Parameters<
 		typeof renderToBuffer

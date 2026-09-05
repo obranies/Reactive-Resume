@@ -14,7 +14,17 @@ const renderHeading = async (css: string, hideSectionIcons = false) => {
 	data.metadata.layout.pages = [{ fullWidth: true, main: ["skills"], sidebar: [] }];
 	data.metadata.stylesheet = { mode: "semantic", source: { languageVersion: 1, text: `@version 1; ${css}` } };
 	data.sections.skills.items = [
-		{ id: "skill", hidden: false, name: "Skill", proficiency: "", level: 0, keywords: [], icon: "", iconColor: "" },
+		{
+			id: "skill",
+			hidden: false,
+			keepTogether: false,
+			name: "Skill",
+			proficiency: "",
+			level: 0,
+			keywords: [],
+			icon: "",
+			iconColor: "",
+		},
 	];
 	const element = createElement(ResumeDocument, {
 		data,
