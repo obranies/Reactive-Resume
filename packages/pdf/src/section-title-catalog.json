@@ -27,7 +27,7 @@
 		"Awards": "ሽልማቶች",
 		"Certifications": "የማረጋገጫዎች",
 		"Publications": "ህትመቶች",
-		"Volunteer": "በጎ ፈቃደኝነት",
+		"Volunteer": "በነፃ ፈቃድ",
 		"References": "ማመልከቻዎች",
 		"Cover Letter": "ማመልከቻ ደብዳቤ"
 	},
@@ -289,7 +289,7 @@
 	},
 	"hi-IN": {
 		"Summary": "सारांश",
-		"Profiles": "प्रोफ़ाइल्स",
+		"Profiles": "प्रोफ़ाइल",
 		"Experience": "अनुभव",
 		"Education": "शिक्षा",
 		"Projects": "प्रोजेक्ट्स",
@@ -683,7 +683,7 @@
 		"Awards": "Çmime",
 		"Certifications": "Certifikime",
 		"Publications": "Publikime",
-		"Volunteer": "Punë vullnetare",
+		"Volunteer": "Vullnetare",
 		"References": "Referenca",
 		"Cover Letter": "Letër motivuese"
 	},
@@ -795,7 +795,7 @@
 		"Awards": "Нагороди",
 		"Certifications": "Сертифікати",
 		"Publications": "Публікації",
-		"Volunteer": "Волонтерство",
+		"Volunteer": "Волонтер",
 		"References": "Рекомендації",
 		"Cover Letter": "Супровідний лист"
 	},
