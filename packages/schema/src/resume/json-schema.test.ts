@@ -56,17 +56,28 @@ describe("createCustomSectionItemJsonSchemas", () => {
 		expect(Object.keys(schemas)).toEqual(sectionTypeSchema.options);
 		expect(schemas.summary).toMatchObject({
 			schemaName: "summaryItemSchema",
-			schema: { required: ["id", "hidden", "content"] },
+			schema: { required: ["id", "hidden", "keepTogether", "content"] },
 		});
 		expect(schemas.experience).toMatchObject({
 			schemaName: "experienceItemSchema",
 			schema: {
-				required: ["id", "hidden", "company", "position", "location", "period", "website", "description", "roles"],
+				required: [
+					"id",
+					"hidden",
+					"keepTogether",
+					"company",
+					"position",
+					"location",
+					"period",
+					"website",
+					"description",
+					"roles",
+				],
 			},
 		});
 		expect(schemas["cover-letter"]).toMatchObject({
 			schemaName: "coverLetterItemSchema",
-			schema: { required: ["id", "hidden", "recipient", "content"] },
+			schema: { required: ["id", "hidden", "keepTogether", "recipient", "content"] },
 		});
 	});
 });
