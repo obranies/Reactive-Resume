@@ -981,6 +981,12 @@ msgstr "ಗಡಿಯ ಅಗಲ"
 msgid "Break the resume into the usual sections so it can be segmented."
 msgstr "ಇದನ್ನು ವಿಭಾಗಿಸಬಹುದಾಗುವಂತೆ ರೆಸ್ಯೂಮೆಯನ್ನು ಸಾಮಾನ್ಯ ವಿಭಾಗಗಳಾಗಿ ಒಡೆಯಿರಿ."
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "ನಿಮ್ಮ ಸ್ವಂತ ರೆಸ್ಯೂಮ್ ಅನ್ನು ರಚಿಸಿ"
@@ -3296,6 +3302,16 @@ msgstr "ಕಂಪನಿ, ಹುದ್ದೆ, ರೆಸ್ಯೂಮ್ ಮತ್�
 msgid "Keep them to roughly two lines, so a skim-reader finishes them."
 msgstr "ಕಣ್ಣಾಡಿಸಿ ಓದುವವರು ಪೂರ್ಣಗೊಳಿಸುವಂತೆ ಅವುಗಳನ್ನು ಸುಮಾರು ಎರಡು ಸಾಲುಗಳಿಗೆ ಸೀಮಿತಗೊಳಿಸಿ."
 
+#. Switch that prevents a single section entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this entry together on one page"
+msgstr ""
+
+#. Switch that prevents a single role-progression entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this role together on one page"
+msgstr ""
+
 #: src/features/ats-checker/messages.ts
 msgid "Keep to two or three families. Each extra font is another chance for one to map badly."
 msgstr "ಎರಡು ಅಥವಾ ಮೂರು ಫಾಂಟ್ ಕುಟುಂಬಗಳಿಗೆ ಸೀಮಿತಗೊಳಿಸಿ. ಪ್ರತಿ ಹೆಚ್ಚುವರಿ ಫಾಂಟ್ ಸರಿಯಾಗಿ ಮ್ಯಾಪ್ ಆಗದಿರುವ ಮತ್ತೊಂದು ಅವಕಾಶ."
@@ -3996,6 +4012,11 @@ msgstr "ಸ್ಕೋರ್ ಮಾಡಲಾಗಿಲ್ಲ"
 msgid "Not sure what to write?"
 msgstr "ಏನು ಬರೆಯಬೇಕೆಂದು ಖಚಿತವಿಲ್ಲವೇ?"
 
+#. Explains why the entry-level keep-together switch is disabled once roles exist
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Not used while this entry has roles — a company block that long would be squashed rather than broken. Use the switch on each role instead."
+msgstr ""
+
 #: src/routes/builder/$resumeId/-sidebar/right/sections/ats-check.tsx
 msgid "Note"
 msgstr "ಗಮನಿಸಿ"
@@ -4059,6 +4080,16 @@ msgstr "ಒಂದೇ ಬಾರಿಗೆ ಮೊದಲ {MAX_IMPORT} ಸಾಲು�
 #: src/features/ats-checker/messages.ts
 msgid "Only the first pages were checked."
 msgstr "ಕೇವಲ ಮೊದಲ ಪುಟಗಳನ್ನು ಮಾತ್ರ ಪರಿಶೀಲಿಸಲಾಗಿದೆ."
+
+#. Warns about the react-pdf limitation of the entry-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the entry fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
+
+#. Warns about the react-pdf limitation of the role-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the role fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
 
 #. Resume card context menu action to open the resume editor
 #. Resume card dropdown action to open the resume editor

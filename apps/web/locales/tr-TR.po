@@ -981,6 +981,12 @@ msgstr "Kenar Kalınlığı"
 msgid "Break the resume into the usual sections so it can be segmented."
 msgstr "Bölümlere ayrılabilmesi için özgeçmişi alışılmış bölümlere ayırın."
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "Kendi özgeçmişinizi oluşturun"
@@ -3296,6 +3302,16 @@ msgstr "Şirketi, rolü, özgeçmişi ve takip tarihini bir arada tutun. Uygulam
 msgid "Keep them to roughly two lines, so a skim-reader finishes them."
 msgstr "Göz gezdiren bir okuyucunun bitirebilmesi için bunları yaklaşık iki satırda tutun."
 
+#. Switch that prevents a single section entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this entry together on one page"
+msgstr ""
+
+#. Switch that prevents a single role-progression entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this role together on one page"
+msgstr ""
+
 #: src/features/ats-checker/messages.ts
 msgid "Keep to two or three families. Each extra font is another chance for one to map badly."
 msgstr "İki veya üç yazı tipi ailesiyle sınırlı tutun. Her ek yazı tipi, birinin yanlış eşleşme ihtimalini artırır."
@@ -3996,6 +4012,11 @@ msgstr "Puanlanmadı"
 msgid "Not sure what to write?"
 msgstr "Ne yazacağınızdan emin değil misiniz?"
 
+#. Explains why the entry-level keep-together switch is disabled once roles exist
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Not used while this entry has roles — a company block that long would be squashed rather than broken. Use the switch on each role instead."
+msgstr ""
+
 #: src/routes/builder/$resumeId/-sidebar/right/sections/ats-check.tsx
 msgid "Note"
 msgstr "Not"
@@ -4059,6 +4080,16 @@ msgstr "Tek seferde yalnızca ilk {MAX_IMPORT} satır içe aktarılır, {overflo
 #: src/features/ats-checker/messages.ts
 msgid "Only the first pages were checked."
 msgstr "Yalnızca ilk sayfalar kontrol edildi."
+
+#. Warns about the react-pdf limitation of the entry-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the entry fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
+
+#. Warns about the react-pdf limitation of the role-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the role fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
 
 #. Resume card context menu action to open the resume editor
 #. Resume card dropdown action to open the resume editor

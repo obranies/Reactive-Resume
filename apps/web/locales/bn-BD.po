@@ -981,6 +981,12 @@ msgstr "বর্ডার প্রস্থ"
 msgid "Break the resume into the usual sections so it can be segmented."
 msgstr "জীবনবৃত্তান্তটিকে প্রচলিত সেকশনে ভাগ করুন, যাতে এটি বিভক্ত করা যায়।"
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "আপনার নিজের জীবনবৃত্তান্ত তৈরি করুন"
@@ -3296,6 +3302,16 @@ msgstr "কোম্পানি, পদ, জীবনবৃত্তান্�
 msgid "Keep them to roughly two lines, so a skim-reader finishes them."
 msgstr "এগুলো প্রায় দুই লাইনে সীমাবদ্ধ রাখুন, যাতে দ্রুত পাঠক তা শেষ করতে পারেন।"
 
+#. Switch that prevents a single section entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this entry together on one page"
+msgstr ""
+
+#. Switch that prevents a single role-progression entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this role together on one page"
+msgstr ""
+
 #: src/features/ats-checker/messages.ts
 msgid "Keep to two or three families. Each extra font is another chance for one to map badly."
 msgstr "দুই বা তিনটি ফন্ট পরিবারে সীমাবদ্ধ থাকুন। প্রতিটি অতিরিক্ত ফন্ট খারাপভাবে ম্যাপ হওয়ার আরেকটি সুযোগ তৈরি করে।"
@@ -3996,6 +4012,11 @@ msgstr "স্কোর করা হয়নি"
 msgid "Not sure what to write?"
 msgstr "কী লিখবেন বুঝতে পারছেন না?"
 
+#. Explains why the entry-level keep-together switch is disabled once roles exist
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Not used while this entry has roles — a company block that long would be squashed rather than broken. Use the switch on each role instead."
+msgstr ""
+
 #: src/routes/builder/$resumeId/-sidebar/right/sections/ats-check.tsx
 msgid "Note"
 msgstr "দ্রষ্টব্য"
@@ -4059,6 +4080,16 @@ msgstr "একবারে কেবল প্রথম {MAX_IMPORT}টি স�
 #: src/features/ats-checker/messages.ts
 msgid "Only the first pages were checked."
 msgstr "শুধুমাত্র প্রথম কয়েকটি পৃষ্ঠা চেক করা হয়েছে।"
+
+#. Warns about the react-pdf limitation of the entry-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the entry fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
+
+#. Warns about the react-pdf limitation of the role-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the role fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
 
 #. Resume card context menu action to open the resume editor
 #. Resume card dropdown action to open the resume editor

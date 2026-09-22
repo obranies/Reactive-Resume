@@ -981,6 +981,12 @@ msgstr "테두리 두께"
 msgid "Break the resume into the usual sections so it can be segmented."
 msgstr "이력서를 일반적인 섹션으로 나누어 구분할 수 있게 하세요."
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "나만의 이력서를 만들어보세요"
@@ -3296,6 +3302,16 @@ msgstr "회사, 직무, 이력서, 후속 연락 날짜를 한곳에 모아 두�
 msgid "Keep them to roughly two lines, so a skim-reader finishes them."
 msgstr "훑어 읽는 사람이 끝까지 읽을 수 있도록 대략 두 줄 이내로 유지하세요."
 
+#. Switch that prevents a single section entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this entry together on one page"
+msgstr ""
+
+#. Switch that prevents a single role-progression entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this role together on one page"
+msgstr ""
+
 #: src/features/ats-checker/messages.ts
 msgid "Keep to two or three families. Each extra font is another chance for one to map badly."
 msgstr "폰트는 두세 종류로 유지하세요. 폰트가 추가될수록 잘못 매핑될 가능성이 커집니다."
@@ -3996,6 +4012,11 @@ msgstr "점수 미부여"
 msgid "Not sure what to write?"
 msgstr "무엇을 써야 할지 모르겠나요?"
 
+#. Explains why the entry-level keep-together switch is disabled once roles exist
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Not used while this entry has roles — a company block that long would be squashed rather than broken. Use the switch on each role instead."
+msgstr ""
+
 #: src/routes/builder/$resumeId/-sidebar/right/sections/ats-check.tsx
 msgid "Note"
 msgstr "참고"
@@ -4059,6 +4080,16 @@ msgstr "한 번에 처음 {MAX_IMPORT}개 행만 가져오며 {overflow}개는 �
 #: src/features/ats-checker/messages.ts
 msgid "Only the first pages were checked."
 msgstr "처음 몇 페이지만 점검했습니다."
+
+#. Warns about the react-pdf limitation of the entry-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the entry fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
+
+#. Warns about the react-pdf limitation of the role-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the role fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
 
 #. Resume card context menu action to open the resume editor
 #. Resume card dropdown action to open the resume editor

@@ -981,6 +981,12 @@ msgstr "Lijndikte"
 msgid "Break the resume into the usual sections so it can be segmented."
 msgstr "Verdeel het cv in de gebruikelijke secties, zodat het kan worden gesegmenteerd."
 
+#. Build info shown in settings; buildSha and buildTime are runtime values, not translatable
+#. js-lingui-explicit-id
+#: src/features/settings/pages/preferences.tsx
+msgid "settings.preferences.buildInfo"
+msgstr ""
+
 #: src/features/resume/public/public-resume.tsx
 msgid "Build your own resume"
 msgstr "Maak je eigen cv"
@@ -3296,6 +3302,16 @@ msgstr "Houd bedrijf, functie, cv en follow-updatum bij elkaar. Schakel in de ap
 msgid "Keep them to roughly two lines, so a skim-reader finishes them."
 msgstr "Houd ze op ongeveer twee regels, zodat een snelle lezer ze afmaakt."
 
+#. Switch that prevents a single section entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this entry together on one page"
+msgstr ""
+
+#. Switch that prevents a single role-progression entry from splitting across pages
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Keep this role together on one page"
+msgstr ""
+
 #: src/features/ats-checker/messages.ts
 msgid "Keep to two or three families. Each extra font is another chance for one to map badly."
 msgstr "Beperk je tot twee of drie families. Elk extra lettertype is weer een kans dat er een verkeerd wordt weergegeven."
@@ -3996,6 +4012,11 @@ msgstr "Niet gescoord"
 msgid "Not sure what to write?"
 msgstr "Weet je niet wat je moet schrijven?"
 
+#. Explains why the entry-level keep-together switch is disabled once roles exist
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Not used while this entry has roles — a company block that long would be squashed rather than broken. Use the switch on each role instead."
+msgstr ""
+
 #: src/routes/builder/$resumeId/-sidebar/right/sections/ats-check.tsx
 msgid "Note"
 msgstr "Notitie"
@@ -4059,6 +4080,16 @@ msgstr "Alleen de eerste {MAX_IMPORT} rijen worden in één keer geïmporteerd, 
 #: src/features/ats-checker/messages.ts
 msgid "Only the first pages were checked."
 msgstr "Alleen de eerste pagina's zijn gecontroleerd."
+
+#. Warns about the react-pdf limitation of the entry-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the entry fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
+
+#. Warns about the react-pdf limitation of the role-level keep-together switch
+#: src/dialogs/resume/sections/keep-together-field.tsx
+msgid "Only works if the role fits on a single page. A longer one is squashed into overlapping lines instead of breaking."
+msgstr ""
 
 #. Resume card context menu action to open the resume editor
 #. Resume card dropdown action to open the resume editor
