@@ -62,6 +62,7 @@ const gengarFixture = ({
 		items: Array.from({ length: count }, (_, index) => ({
 			id: `skill-${index}`,
 			hidden: false,
+			keepTogether: false,
 			icon: "",
 			iconColor: "",
 			name: index === 0 ? "Engineering" : `Overflow skill ${index}`,

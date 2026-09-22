@@ -105,6 +105,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-profile-omega",
 				hidden: false,
+				keepTogether: false,
 				icon: "",
 				iconColor: "",
 				network: "OrbitNet",
@@ -120,6 +121,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-experience-northstar",
 				hidden: false,
+				keepTogether: false,
 				company: "Northstar Robotics",
 				position: "",
 				location: "Berlin",
@@ -128,12 +130,14 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 				roles: [
 					{
 						id: "synthetic-role-staff",
+						keepTogether: false,
 						position: "Staff Platform Engineer",
 						period: "2018-02 to 2020-12",
 						description: EXPERIENCE_ROLE_ONE_HTML,
 					},
 					{
 						id: "synthetic-role-principal",
+						keepTogether: false,
 						position: "Principal Reliability Engineer",
 						period: "2021 / Present",
 						description: EXPERIENCE_ROLE_TWO_HTML,
@@ -144,6 +148,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-hidden-experience",
 				hidden: true,
+				keepTogether: false,
 				company: HIDDEN_TOKENS[0],
 				position: "",
 				location: "",
@@ -161,6 +166,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-education-tokyo",
 				hidden: false,
+				keepTogether: false,
 				school: "東京大学",
 				degree: "Master of Computer Science",
 				area: "Distributed Systems",
@@ -179,6 +185,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-skill-typescript",
 				hidden: false,
+				keepTogether: false,
 				icon: "",
 				iconColor: "",
 				name: "TypeScript",
@@ -189,6 +196,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-skill-kubernetes",
 				hidden: false,
+				keepTogether: false,
 				icon: "",
 				iconColor: "",
 				name: "Kubernetes",
@@ -205,6 +213,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			{
 				id: "synthetic-project-observatory",
 				hidden: false,
+				keepTogether: false,
 				name: "Export Observatory",
 				period: "2022 to Winter 2024",
 				website: resolveWebsite("https://project.example/observatory", "project.example/observatory"),
@@ -223,7 +232,7 @@ export function createSyntheticCorpus(variant: ExportVariant): SyntheticCorpus {
 			showHeading: true,
 			keepTogether: false,
 			startOnNewPage: false,
-			items: [{ id: "synthetic-custom-zeta", hidden: false, content: CUSTOM_HTML }],
+			items: [{ id: "synthetic-custom-zeta", hidden: false, keepTogether: false, content: CUSTOM_HTML }],
 		},
 	];
 

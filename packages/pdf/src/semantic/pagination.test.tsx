@@ -95,6 +95,7 @@ const azurillAuthoredOverflowFixture = () => {
 		{
 			id: "sidebar-profile",
 			hidden: false,
+			keepTogether: false,
 			icon: "github-logo",
 			iconColor: "",
 			network: "SIDEBAR TOKEN",
@@ -107,6 +108,7 @@ const azurillAuthoredOverflowFixture = () => {
 		{
 			id: "manual-continuation",
 			hidden: false,
+			keepTogether: false,
 			company: "MANUAL FULL WIDTH TOKEN",
 			position: "Independent authored page",
 			location: "",

@@ -23,6 +23,7 @@ it.each([false, true])("exposes keyword list semantics for custom=%s", (custom) 
 	data.sections.skills.items = [
 		{
 			id: "skill",
+			keepTogether: false,
 			name: "Engineering",
 			hidden: false,
 			icon: "",
@@ -54,6 +55,7 @@ it("retains section labels when visual heading is disabled", () => {
 	data.sections.skills.items = [
 		{
 			id: "skill",
+			keepTogether: false,
 			name: "TypeScript",
 			hidden: false,
 			icon: "",
@@ -95,6 +97,7 @@ it("characterizes stable heading, hidden-content, contact, and reading-order beh
 				{
 					id: "custom-visible-item",
 					hidden: false,
+					keepTogether: false,
 					name: "Unplaced Item",
 					period: "",
 					website: { url: "", label: "", inlineLink: false },
@@ -116,6 +119,7 @@ it("characterizes stable heading, hidden-content, contact, and reading-order beh
 				{
 					id: "custom-hidden-item-value",
 					hidden: true,
+					keepTogether: false,
 					name: "Hidden Custom Item",
 					period: "",
 					website: { url: "", label: "", inlineLink: false },
@@ -149,6 +153,7 @@ it("exposes entry and subordinate-role headings with safe nested rich-text lists
 			roles: [
 				{
 					id: "hierarchy-role",
+					keepTogether: false,
 					position: "Lead Role",
 					period: "2020 - 2022",
 					description: "<p>Role <strong>detail</strong>.</p>",
@@ -205,6 +210,7 @@ it("promotes role heading to H3 when experience company is blank", () => {
 			roles: [
 				{
 					id: "blank-company-role",
+					keepTogether: false,
 					position: "Role Without Company",
 					period: "2020 - 2022",
 					description: "<p>Role detail.</p>",

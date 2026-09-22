@@ -482,6 +482,7 @@ export function parseReactiveResumeV4JSON(json: string): ResumeData {
 					return {
 						id: item.id || generateId(),
 						hidden: !(item.visible ?? true),
+						keepTogether: false,
 						company: item.name?.trim() || `#${index + 1}`,
 						// Only use description as subtitle when item has a name;
 						// otherwise description IS the primary content and goes to the body below

@@ -26,6 +26,7 @@ export function createSkillKeywordFixture({
 		{
 			id: "skill",
 			hidden: false,
+			keepTogether: false,
 			icon: "",
 			iconColor: "",
 			name: "Engineering",

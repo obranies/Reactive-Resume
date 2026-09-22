@@ -145,6 +145,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "experience-dated",
 				hidden: false,
+				keepTogether: false,
 				company: "Experience Parent",
 				position: "Lead Engineer",
 				location: "Oslo LOCATION_ORDER",
@@ -154,12 +155,14 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 				roles: [
 					{
 						id: "role-one",
+						keepTogether: false,
 						position: "Role One",
 						period: "2020 ROLE_ONE",
 						description: richText("First role details"),
 					},
 					{
 						id: "role-two",
+						keepTogether: false,
 						position: "Role Two",
 						period: "2022 ROLE_TWO",
 						description: richText("Second role details"),
@@ -169,6 +172,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "experience-no-location",
 				hidden: false,
+				keepTogether: false,
 				company: "Experience No Location",
 				position: "Solo Role",
 				location: "",
@@ -180,6 +184,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "experience-no-period",
 				hidden: false,
+				keepTogether: false,
 				company: "Experience No Period",
 				position: "No Date Role",
 				location: "Oslo EXP_NO_PERIOD",
@@ -197,6 +202,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "education-dated",
 				hidden: false,
+				keepTogether: false,
 				school: "Education School",
 				degree: "Degree",
 				area: "Area",
@@ -209,6 +215,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "education-empty-period",
 				hidden: false,
+				keepTogether: false,
 				school: "Education Empty Period",
 				degree: "",
 				area: "",
@@ -227,6 +234,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "project-dated",
 				hidden: false,
+				keepTogether: false,
 				name: "Project Entry",
 				period: "2020 PROJECT_DATE",
 				website: emptyWebsite(),
@@ -241,6 +249,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "award-dated",
 				hidden: false,
+				keepTogether: false,
 				title: "Award Entry",
 				awarder: "Award Society",
 				date: "2021 AWARD_DATE",
@@ -256,6 +265,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "certification-dated",
 				hidden: false,
+				keepTogether: false,
 				title: "Certification Entry",
 				issuer: "Certification Issuer",
 				date: "2022 CERT_DATE",
@@ -271,6 +281,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "publication-empty-date",
 				hidden: false,
+				keepTogether: false,
 				title: "Publication Empty Date",
 				publisher: "Publication Publisher",
 				date: "",
@@ -286,6 +297,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 			{
 				id: "volunteer-dated",
 				hidden: false,
+				keepTogether: false,
 				organization: "Volunteer Organization",
 				location: "Volunteer City",
 				period: "2023 VOLUNTEER_DATE",
@@ -311,6 +323,7 @@ const dateFixture = (locale: "en-US" | "ar-SA" = "en-US"): ResumeData => {
 					roles: [
 						{
 							id: "custom-role",
+							keepTogether: false,
 							position: "Custom Role",
 							period: "2024 CUSTOM_ROLE_DATE",
 							description: "",
@@ -601,6 +614,7 @@ describe("date layout characterization (#3155, #2841)", () => {
 			{
 				id: "skill-level-control",
 				hidden: false,
+				keepTogether: false,
 				icon: "star",
 				iconColor: "",
 				name: "Level control",

@@ -39,6 +39,7 @@ async function renderList({
 	data.sections.projects.items = Array.from({ length: columns }, (_, column) => ({
 		id: `project-${column}`,
 		hidden: false,
+		keepTogether: false,
 		name: `Project${column}`,
 		period: "",
 		website: { url: "", label: "", inlineLink: false },

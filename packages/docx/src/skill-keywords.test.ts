@@ -9,6 +9,7 @@ function fixture() {
 		{
 			id: "one",
 			hidden: false,
+			keepTogether: false,
 			name: "Engineering",
 			proficiency: "Expert",
 			level: 3,

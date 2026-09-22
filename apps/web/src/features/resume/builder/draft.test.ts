@@ -121,6 +121,7 @@ function experienceItem(
 ): ResumeData["sections"]["experience"]["items"][number] {
 	return {
 		id,
+		keepTogether: false,
 		company,
 		position: "Engineer",
 		location: "",

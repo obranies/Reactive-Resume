@@ -39,6 +39,7 @@ export function buildExportSample({ name, accent, typeface, template }: ExportPl
 		{
 			id: "sample-experience",
 			hidden: false,
+			keepTogether: false,
 			company: "Northstar Studio",
 			position: t`Senior product designer`,
 			location: "London, UK",
@@ -50,6 +51,7 @@ export function buildExportSample({ name, accent, typeface, template }: ExportPl
 		{
 			id: "sample-experience-previous",
 			hidden: false,
+			keepTogether: false,
 			company: "Form & Field",
 			position: t`Product designer`,
 			location: "Bristol, UK",
@@ -64,6 +66,7 @@ export function buildExportSample({ name, accent, typeface, template }: ExportPl
 		{
 			id: "sample-education",
 			hidden: false,
+			keepTogether: false,
 			school: "University of the West of England",
 			degree: t`BA`,
 			area: t`Graphic Design`,
@@ -79,6 +82,7 @@ export function buildExportSample({ name, accent, typeface, template }: ExportPl
 		{
 			id: "sample-skills",
 			hidden: false,
+			keepTogether: false,
 			icon: "",
 			iconColor: "",
 			name: t`Design`,

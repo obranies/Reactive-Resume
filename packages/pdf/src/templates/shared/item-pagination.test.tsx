@@ -37,6 +37,7 @@ const readPhysicalPages = async (document: ParsedPdf): Promise<string[]> => {
 const makeItem = (id: string, description: string) => ({
 	id,
 	hidden: false,
+	keepTogether: false,
 	company: id,
 	position: "Synthetic item",
 	location: "",
@@ -154,6 +155,7 @@ describe("item pagination token matrix", () => {
 			{
 				id: "sidebar",
 				hidden: false,
+				keepTogether: false,
 				icon: "github-logo",
 				iconColor: "",
 				network: "SIDEBAR_001",
